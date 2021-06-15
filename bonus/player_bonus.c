@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:13:53 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/15 18:02:01 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/15 18:04:53 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,24 +92,28 @@ void	update(t_cub *cub, t_player *player)
 		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x - 1] = 'X';
 		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x] = '0';
 		cub->ennemy.pos.x -= 1;
+		cub->ennemy.orientation = 0;
 	}
 	else if(cub->grid[(int)cub->ennemy.pos.y + 1][(int)cub->ennemy.pos.x] == '0')
 	{
 		cub->grid[(int)cub->ennemy.pos.y + 1][(int)cub->ennemy.pos.x] = 'X';
 		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x] = '0';
 		cub->ennemy.pos.y += 1;
+		cub->ennemy.orientation = 1;
 	}
 	else if(cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x + 1] == '0')
 	{
 		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x + 1] = 'X';
 		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x] = '0';
 		cub->ennemy.pos.x += 1;
+		cub->ennemy.orientation = 2;
 	}
 	else if(cub->grid[(int)cub->ennemy.pos.y - 1][(int)cub->ennemy.pos.x] == '0')
 	{
 		cub->grid[(int)cub->ennemy.pos.y - 1][(int)cub->ennemy.pos.x] = 'X';
 		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x] = '0';
 		cub->ennemy.pos.y -= 1;
+		cub->ennemy.orientation = 3;
 	}
 }
 
