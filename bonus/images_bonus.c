@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 19:19:50 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/11 12:57:24 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/15 16:51:10 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	init_img(t_img *img)
 	img->bits_per_pixel = 0;
 	img->line_length = 0;
 	img->endian = 0;
-	img->wid = 1920;
-	img->hei = 1080;
+	img->wid = 800;
+	img->hei = 800;
 }
 
 void	free_img(t_cub *cub)
