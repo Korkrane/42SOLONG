@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:27:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/11 18:24:53 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/15 16:54:32 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct	s_player
 	int			turn_d;
 	int			rot_d;
 	t_pos		pos;
+	int			orientation;
 }				t_player;
 
 typedef struct	s_img
@@ -200,7 +201,7 @@ typedef struct	s_bmp
 typedef struct	s_cub
 {
 	t_health	healthbar;
-	t_text		text[5];
+	t_text		text[6];
 	t_player	player;
 	char		**grid;
 	t_ray		*rays;
