@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   healthbar.c                                        :+:      :+:    :+:   */
+/*   healthbar_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 21:43:28 by bahaas            #+#    #+#             */
-/*   Updated: 2021/02/20 11:19:51 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/11 17:46:25 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Determine position of our healthbar. The specific numbers  multiplication
 ** allow us to have always the same padding regardless of the resolution used.
 */
-
+/*
 void	init_healthbar(t_cub *cub)
 {
 	cub->healthbar.start.x = cub->win.wid - 0.5 * cub->win.wid;
@@ -40,3 +40,4 @@ void	render_healthbar_text(t_cub *cub)
 		(cub->healthbar.end.y - cub->healthbar.start.y) / 1.25;
 	mlx_string_put(cub->win.mlx_p, cub->win.win_p, x, y, WHITE, "100 / 100");
 }
+*/

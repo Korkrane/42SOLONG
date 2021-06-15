@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.c                                          :+:      :+:    :+:   */
+/*   texture_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:21:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/02/25 21:13:18 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/15 17:23:17 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_texture(t_cub *cub)
 	int i;
 
 	i = 0;
-	while (i < 5)
+	while (i < 8)
 	{
 		cub->text[i].ptr = NULL;
 		cub->text[i].data = NULL;
@@ -36,7 +36,7 @@ void	free_texture(t_cub *cub)
 	int i;
 
 	i = -1;
-	while (++i < 5)
+	while (++i < 8)
 	{
 		if (cub->text[i].name)
 		{
@@ -52,12 +52,26 @@ void	free_texture(t_cub *cub)
 	}
 }
 
+int		new_fill_texture(t_cub *cub)
+{
+	cub->text[0].name = ft_strdup("./textures/player.xpm");
+	cub->text[1].name = ft_strdup("./textures/collect.xpm");
+	cub->text[2].name = ft_strdup("./textures/Nouveau-projet-_1_.xpm");
+	cub->text[3].name = ft_strdup("./textures/pillar.xpm");
+	cub->text[4].name = ft_strdup("./textures/empty.xpm");
+	cub->text[5].name = ft_strdup("./textures/player_reverse.xpm");
+	cub->text[6].name = ft_strdup("./textures/evil.xpm");
+	cub->text[7].name = ft_strdup("./textures/evil-_1_.xpm");
+	return (1);
+}
+
 int		load_texture(t_cub *cub)
 {
 	int i;
 
 	i = -1;
-	while (++i < 5)
+	new_fill_texture(cub);
+	while (++i < 8)
 	{
 		if (cub->text[i].name)
 		{
@@ -70,64 +84,5 @@ int		load_texture(t_cub *cub)
 				&cub->text[i].endian);
 		}
 	}
-	return (1);
-}
-
-/*
-** Determine if the line will contain the path of a valid texture and
-** try to open file related to it.
-*/
-
-int		is_texture(char **line_data, t_cub *cub)
-{
-	int fd;
-	int i;
-
-	i = 0;
-	if (!ft_strcmp(line_data[0], "SO") || !ft_strcmp(line_data[0], "EA") ||
-			!ft_strcmp(line_data[0], "NO") || !ft_strcmp(line_data[0], "S") ||
-			!ft_strcmp(line_data[0], "WE"))
-	{
-		fd = open(line_data[1], O_RDONLY);
-		if (fd < 0)
-		{
-			cub->data.txtr_err = 1;
-			return (is_error("Couldn't open a texture file or file missing"));
-		}
-		close(fd);
-		while (line_data[i])
-			i++;
-		if (i != 2)
-		{
-			cub->data.txtr_err = 1;
-			return (is_error("A texture has more parameters than expected"));
-		}
-		return (1);
-	}
-	return (0);
-}
-
-/*
-** Check if texture isn't already declared and fill it the name with the path
-** given.
-*/
-
-int		fill_texture(t_cub *cub, char **line_data)
-{
-	int i;
-
-	if (!ft_strcmp(line_data[0], "NO"))
-		i = 0;
-	else if (!ft_strcmp(line_data[0], "SO"))
-		i = 1;
-	else if (!ft_strcmp(line_data[0], "WE"))
-		i = 2;
-	else if (!ft_strcmp(line_data[0], "EA"))
-		i = 3;
-	else if (!ft_strcmp(line_data[0], "S"))
-		i = 4;
-	if (cub->text[i].name)
-		return (is_error("A texture is declared twice"));
-	cub->text[i].name = ft_strdup(line_data[1]);
 	return (1);
 }

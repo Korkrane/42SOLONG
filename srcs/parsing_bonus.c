@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 21:31:08 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/11 00:19:36 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/11 15:41:51 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,55 @@ int		fill_list_grid(t_cub *cub, char *line, t_list **list)
 int		line_data(t_cub *cub, char *line, t_list **list)
 {
 	cub->data.res = fill_list_grid(cub, line, list);
-	return (1);
+	return (cub->data.res);
+}
+
+
+void	print_map(t_cub *cub)
+{
+	int i = 0;
+	int j = 0;
+	while(i < cub->data.rows)
+	{
+		j = 0;
+		while(j < cub->data.cols)
+		{
+			printf("%c", cub->grid[i][j]);
+			j++;
+		}	
+		printf("\n");
+		i++;
+	}
 }
 
 /*
-** Last malloc and data attribution before loading the game.
+int valid_border(t_cub *cub)
+{
+	int i = 0;
+	int j = 0;
+	while(i < cub->data.rows)
+	{
+		if(cub->grid[i][j] != '1')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 */
 
-int		last_load(t_cub *cub)
+int valid_map_format(t_cub *cub)
 {
-	init_healthbar(cub);
-	if (cub->win.wid >= 1)
+	
+	int i = 0;
+	int line_len = ft_strlen(cub->grid[i]);
+	while(i < cub->data.rows)
 	{
-		cub->data.dist_pplane = (cub->win.wid / 2) / tan(FOV / 2);
-		cub->rays = malloc(sizeof(t_ray) * cub->win.wid);
-		if (!cub->rays)
-			return (is_error("Not enough memory to malloc rays"));
-		cub->ray_load = 1;
+		line_len = ft_strlen(cub->grid[i]);
+		if(line_len != cub->data.cols)
+			return (0);
+		i++;
 	}
-	else
-		return (is_error("Map has invalid resolution"));
+	printf("test i value : %d\n", i);
 	return (1);
 }
 
@@ -64,27 +93,15 @@ int		last_load(t_cub *cub)
 
 int		check_missing(t_cub *cub)
 {
-	if (!cub->data.grid_flag)
-		return (is_error("Map is missing"));
-	if (!cub->data.ceil)
-		return (is_error("Ceil color is missing"));
-	if (!cub->data.floor)
-		return (is_error("Floor color is missing"));
-	if (!cub->win.wid)
-		return (is_error("Resolution is missing"));
-	if (!cub->text[0].name)
-		return (is_error("North texture is missing"));
-	if (!cub->text[1].name)
-		return (is_error("South texture is missing"));
-	if (!cub->text[2].name)
-		return (is_error("West texture is missing"));
-	if (!cub->text[3].name)
-		return (is_error("East texture is missing"));
-	if (!cub->text[4].name)
-		return (is_error("Sprite texture is missing"));
-	if (cub->data.floor == -1 || cub->data.ceil == -1)
-		return (0);
-	return (last_load(cub));
+	if (!cub->data.exit_number)
+		return (is_error("There is 0 exit"));
+	if (!cub->data.collect_number)
+		return (is_error("There is 0 collectible"));
+	if(!valid_map_format(cub))
+		return (is_error("Map hasn't a valid format"));
+	printf("check missing return 1\n");
+	print_map(cub);
+	return (1);
 }
 
 /*

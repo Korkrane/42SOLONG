@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:19:13 by bahaas            #+#    #+#             */
-/*   Updated: 2021/03/10 11:24:36 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/11 01:23:12 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,10 @@ int		grid_parsing(t_cub *cub, t_list *list)
 		ft_lstclear(&list, &ft_free);
 		return (0);
 	}
+	printf("grid alloc OK\n");
 	ft_lstclear(&list, &ft_free);
 	if (!check_player(cub) || !check_grid(cub) || !check_sprt(cub))
 		return (0);
+	printf("grid_parsing return 1\n");
 	return (1);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_render.c                                     :+:      :+:    :+:   */
+/*   utils_render_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 22:22:51 by bahaas            #+#    #+#             */
-/*   Updated: 2021/02/18 17:05:39 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/11 02:29:00 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	square(t_pos pos, int size, t_cub *cub, int color)
 	int		j;
 
 	i = -1;
-	while (++i <= size)
+	while (++i <= (cub->win.wid / cub->data.cols))
 	{
 		j = -1;
-		while (++j <= size)
+		while (++j <= (cub->win.hei / cub->data.cols))
 			my_mlx_pixel_put(&cub->win, pos.x + j, pos.y + i, color);
 	}
 }

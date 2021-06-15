@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:27:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/15 16:54:32 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/15 17:49:27 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,8 +201,9 @@ typedef struct	s_bmp
 typedef struct	s_cub
 {
 	t_health	healthbar;
-	t_text		text[6];
+	t_text		text[8];
 	t_player	player;
+	t_player	ennemy;
 	char		**grid;
 	t_ray		*rays;
 	t_sprt		*sprt;

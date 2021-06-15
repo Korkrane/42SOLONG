@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:43:26 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/11 01:50:37 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/10 23:56:08 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		cub_ext(char *map_file)
 	while (map_file[i])
 		i++;
 	i -= 4;
-	if (!ft_strcmp(&map_file[i], ".cub"))
+	if (!ft_strcmp(&map_file[i], ".ber"))
 		return (1);
 	return (is_error("File extension is not ending with .ber"));
 }

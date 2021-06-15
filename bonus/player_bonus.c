@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:13:53 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/15 16:06:31 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/15 18:02:01 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,86 @@ void	init_player(t_player *player)
 ** with cos and sin.
 */
 
+int		check_ennemy(t_cub *cub)
+{
+	int x;
+	int y;
+	int num_position;
+
+	y = -1;
+	while (++y < cub->data.rows)
+	{
+		x = -1;
+		while (cub->grid[y][++x])
+		{
+			if (ft_strchr("X", cub->grid[y][x]))
+			{
+				pos_player(&cub->ennemy, x, y, cub->grid[y][x]);
+			}
+		}
+	}
+	return (1);
+}
+
+
+void	iprint_map(t_cub *cub)
+{
+	int i = 0;
+	int j = 0;
+	while(i < cub->data.rows)
+	{
+		j = 0;
+		while(j < cub->data.cols)
+		{
+			printf("%c", cub->grid[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
+
+
 void	update(t_cub *cub, t_player *player)
 {
 	float new_x;
 	float new_y;
 
+	iprint_map(cub);
 	new_x = player->pos.x +  player->lateral_d;
 	new_y = player->pos.y - player->walk_d;
 	if (!grid_is_wall(new_x, new_y, cub))
 	{
-			//printf("new pos : y:%f, x:%f\n", new_y, new_x);
-			//printf("new pos value : %c\n", cub->grid[(int)new_y][(int)new_x]);
-			//printf("old pos : y:%f, x:%f\n", player->pos.y, player->pos.x);
-			cub->grid[(int)player->pos.y][(int)player->pos.x] = '0';
-			cub->grid[(int)new_y][(int)new_x] = 'P';
+		cub->grid[(int)player->pos.y][(int)player->pos.x] = '0';
+		cub->grid[(int)new_y][(int)new_x] = 'P';
 		cub->player.pos.x = new_x;
 		cub->player.pos.y = new_y;
 		cub->total_action++;
+	}
+	check_ennemy(cub);
+	if(cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x - 1] == '0')
+	{
+		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x - 1] = 'X';
+		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x] = '0';
+		cub->ennemy.pos.x -= 1;
+	}
+	else if(cub->grid[(int)cub->ennemy.pos.y + 1][(int)cub->ennemy.pos.x] == '0')
+	{
+		cub->grid[(int)cub->ennemy.pos.y + 1][(int)cub->ennemy.pos.x] = 'X';
+		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x] = '0';
+		cub->ennemy.pos.y += 1;
+	}
+	else if(cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x + 1] == '0')
+	{
+		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x + 1] = 'X';
+		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x] = '0';
+		cub->ennemy.pos.x += 1;
+	}
+	else if(cub->grid[(int)cub->ennemy.pos.y - 1][(int)cub->ennemy.pos.x] == '0')
+	{
+		cub->grid[(int)cub->ennemy.pos.y - 1][(int)cub->ennemy.pos.x] = 'X';
+		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x] = '0';
+		cub->ennemy.pos.y -= 1;
 	}
 }
 

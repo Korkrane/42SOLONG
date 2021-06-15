@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 23:50:20 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/15 16:20:34 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/15 17:42:03 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_cub(t_cub *cub, char *map)
 	init_img(&cub->win.img);
 	init_grid(cub);
 	init_player(&cub->player);
+	init_player(&cub->ennemy);
 	init_texture(cub);
 	cub->ray_load = 0;
 	cub->sprt_load = 0;

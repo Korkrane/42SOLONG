@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprites.c                                          :+:      :+:    :+:   */
+/*   sprites_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 17:54:11 by bahaas            #+#    #+#             */
-/*   Updated: 2021/02/25 16:11:49 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/11 15:31:30 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		load_sprt(t_cub *cub)
 		j = -1;
 		while (cub->grid[i][++j])
 		{
-			if (cub->grid[i][j] == '2' && id < cub->data.num_sprt)
+			if (ft_strchr("1CEP", cub->grid[i][j]) && id < cub->data.num_sprt)
 			{
 				init_sprt(cub, id, j, i);
 				id++;
@@ -72,7 +72,7 @@ void	num_sprt(t_cub *cub)
 		j = -1;
 		while (cub->grid[i][++j])
 		{
-			if (cub->grid[i][j] == '2')
+			if (ft_strchr("1CEP", cub->grid[i][j]))
 				cub->data.num_sprt++;
 		}
 	}
