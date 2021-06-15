@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 19:15:43 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/11 12:57:16 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/15 16:20:53 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_win(t_cub *cub)
 
 void	load_win(t_win *win)
 {
-	win->wid = 800;
-	win->hei = 800;
+	win->wid = 1920;
+	win->hei = 1080;
 	win->win_p = mlx_new_window(win->mlx_p, win->wid, win->hei, "cub3D");
 }

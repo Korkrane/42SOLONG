@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 23:50:20 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/11 18:23:53 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/15 16:20:34 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	load_cub(t_cub *cub, char *map)
 			end_cub(cub);
 		printf("So_long is launching..\n");
 		printf("player pos : [%f:%f]\n", cub->player.pos.x, cub->player.pos.y);
-		cub->win.wid = 800;
-		cub->win.hei = 800;
+		//cub->win.wid = 1920;
+		//cub->win.hei = 1080;
 		run_cub(cub);
 	}
 	else
@@ -88,9 +88,8 @@ void	run_cub(t_cub *cub)
 	load_win(&cub->win);
 	mlx_hook(cub->win.win_p, 3, 1L << 1, key_released, &cub->player);
 	mlx_hook(cub->win.win_p, 2, 1L << 0, key_pressed, cub);
-	mlx_loop_hook(cub->win.mlx_p, render, cub);
-	render(cub);
 	mlx_loop_hook(cub->win.mlx_p, render_lol, cub);
+	mlx_string_put(cub->win.mlx_p, cub->win.win_p, 50, 50, WHITE, ft_itoa(cub->total_action));
 	mlx_hook(cub->win.win_p, 33, 1L << 17, &end_cub, cub);
 	mlx_loop(cub->win.mlx_p);
 }

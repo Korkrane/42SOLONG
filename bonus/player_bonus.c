@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:13:53 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/11 17:51:17 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/15 16:06:31 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ void	update(t_cub *cub, t_player *player)
 	new_y = player->pos.y - player->walk_d;
 	if (!grid_is_wall(new_x, new_y, cub))
 	{
-		cub->grid[(int)player->pos.y][(int)player->pos.x] = '0';
-		cub->grid[(int)new_y][(int)new_x] = 'P';
+			//printf("new pos : y:%f, x:%f\n", new_y, new_x);
+			//printf("new pos value : %c\n", cub->grid[(int)new_y][(int)new_x]);
+			//printf("old pos : y:%f, x:%f\n", player->pos.y, player->pos.x);
+			cub->grid[(int)player->pos.y][(int)player->pos.x] = '0';
+			cub->grid[(int)new_y][(int)new_x] = 'P';
 		cub->player.pos.x = new_x;
 		cub->player.pos.y = new_y;
 		cub->total_action++;

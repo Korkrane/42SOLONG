@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:21:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/11 17:16:44 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/15 16:18:56 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_texture(t_cub *cub)
 	int i;
 
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		cub->text[i].ptr = NULL;
 		cub->text[i].data = NULL;
@@ -36,7 +36,7 @@ void	free_texture(t_cub *cub)
 	int i;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < 5)
 	{
 		if (cub->text[i].name)
 		{
@@ -56,8 +56,9 @@ int		new_fill_texture(t_cub *cub)
 {
 	cub->text[0].name = ft_strdup("./textures/player.xpm");
 	cub->text[1].name = ft_strdup("./textures/collect.xpm");
-	cub->text[2].name = ft_strdup("./textures/exit.xpm");
-	cub->text[3].name = ft_strdup("./textures/wall.xpm");
+	cub->text[2].name = ft_strdup("./textures/Nouveau-projet-_1_.xpm");
+	cub->text[3].name = ft_strdup("./textures/pillar.xpm");
+	cub->text[4].name = ft_strdup("./textures/empty.xpm");
 	return (1);
 }
 
@@ -67,7 +68,7 @@ int		load_texture(t_cub *cub)
 
 	i = -1;
 	new_fill_texture(cub);
-	while (++i < 4)
+	while (++i < 5)
 	{
 		if (cub->text[i].name)
 		{

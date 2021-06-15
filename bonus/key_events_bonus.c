@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:04:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/11 12:37:03 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/15 15:53:26 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		key_pressed(int key, t_cub *cub)
 	else if (key == KEY_ESC)
 		end_cub(cub);
 	update(cub, &cub->player);
-	render(cub);
+	render_lol(cub);
 	return (0);
 }
 
