@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:43:26 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/10 23:56:08 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/16 13:50:28 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 ** PARse each line of the map and save the length of the longest one.
 */
 
-int		count_cols(t_list *list)
+int	count_cols(t_list *list)
 {
-	int max;
-	int i;
+	int	max;
+	int	i;
 
 	max = 0;
 	while (list)
@@ -36,9 +36,9 @@ int		count_cols(t_list *list)
 ** Check if string sent has only numeric values.
 */
 
-int		is_num(char *num)
+int	is_num(char *num)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (num[i])
@@ -55,7 +55,7 @@ int		is_num(char *num)
 ** Display error message and lead to the end of the program.
 */
 
-int		is_error(char *str)
+int	is_error(char *str)
 {
 	printf("Error\n%s\n", str);
 	return (0);
@@ -65,9 +65,9 @@ int		is_error(char *str)
 ** Free the content used during the parsing analysis of each line.
 */
 
-int		free_split(char ***split, int ret)
+int	free_split(char ***split, int ret)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while ((*split)[++i])
@@ -84,9 +84,9 @@ int		free_split(char ***split, int ret)
 ** Check if map file has the correct extension.
 */
 
-int		cub_ext(char *map_file)
+int	cub_ext(char *map_file)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map_file[i])

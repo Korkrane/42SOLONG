@@ -6,7 +6,7 @@
 #    By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/11 12:08:52 by bahaas            #+#    #+#              #
-#    Updated: 2021/06/15 17:26:54 by bahaas           ###   ########.fr        #
+#    Updated: 2021/06/16 13:45:57 by bahaas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ SRCS		= srcs/main.c srcs/grid_bonus.c srcs/images_bonus.c \
 SRCS_BONUS	= bonus/main.c bonus/grid_bonus.c bonus/images_bonus.c \
 			bonus/player_bonus.c bonus/window_bonus.c bonus/parsing_bonus.c \
 			bonus/texture_bonus.c bonus/utils_parsing_bonus.c bonus/sprites_bonus.c \
-			bonus/healthbar_bonus.c bonus/utils_bonus.c bonus/grid_parsing_bonus.c \
+			bonus/utils_bonus.c bonus/grid_parsing_bonus.c \
 			bonus/utils_render_bonus.c bonus/key_events_bonus.c bonus/render_bonus.c \
-			bonus/minimap_bonus.c bonus/render_sprites_bonus.c
+			bonus/minimap_bonus.c
 
 CC		= gcc
 #CFLAGS	= -Wextra -Werror -Wall

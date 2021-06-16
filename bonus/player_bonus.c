@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:13:53 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/15 18:04:53 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/16 13:51:55 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,54 +67,74 @@ void	iprint_map(t_cub *cub)
 		printf("\n");
 		i++;
 	}
+	printf("\n");
 }
 
 
 void	update(t_cub *cub, t_player *player)
 {
-	float new_x;
-	float new_y;
+	int new_x;
+	int new_y;
 
-	iprint_map(cub);
+	player->old_pos.x = player->pos.x;
+	player->old_pos.y = player->pos.y;
+	cub->ennemy.old_pos.x = cub->ennemy.pos.x;
+	cub->ennemy.old_pos.y = cub->ennemy.pos.y;
 	new_x = player->pos.x +  player->lateral_d;
 	new_y = player->pos.y - player->walk_d;
 	if (!grid_is_wall(new_x, new_y, cub))
 	{
+		cub->total_action++;
+		if(cub->grid[new_y][new_x] == 'E')
+		{
+			printf("END: You left in another dimension\n");
+			end_cub(cub);
+		}
 		cub->grid[(int)player->pos.y][(int)player->pos.x] = '0';
-		cub->grid[(int)new_y][(int)new_x] = 'P';
+		cub->grid[new_y][new_x] = 'P';
 		cub->player.pos.x = new_x;
 		cub->player.pos.y = new_y;
-		cub->total_action++;
 	}
 	check_ennemy(cub);
-	if(cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x - 1] == '0')
+	if(cub->ennemy_limit_move == 0)
+		cub->ennemy_limit_move = 4;
+	if (cub->ennemy_limit_move == 4)
+		cub->ennemy.orientation = rand()%(5-1);
+	if(cub->ennemy.orientation == 0 && cub->grid[cub->ennemy.pos.y][cub->ennemy.pos.x - 1] == '0')
 	{
-		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x - 1] = 'X';
-		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x] = '0';
+		cub->grid[cub->ennemy.pos.y][cub->ennemy.pos.x - 1] = 'X';
+		if(cub->grid[cub->ennemy.pos.y][cub->ennemy.pos.x] != 'P')
+			cub->grid[cub->ennemy.pos.y][cub->ennemy.pos.x] = '0';
 		cub->ennemy.pos.x -= 1;
-		cub->ennemy.orientation = 0;
 	}
-	else if(cub->grid[(int)cub->ennemy.pos.y + 1][(int)cub->ennemy.pos.x] == '0')
+	else if(cub->ennemy.orientation == 1 && cub->grid[cub->ennemy.pos.y + 1][cub->ennemy.pos.x] == '0')
 	{
-		cub->grid[(int)cub->ennemy.pos.y + 1][(int)cub->ennemy.pos.x] = 'X';
-		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x] = '0';
+		cub->grid[cub->ennemy.pos.y + 1][cub->ennemy.pos.x] = 'X';
+		if( cub->grid[cub->ennemy.pos.y][cub->ennemy.pos.x] != 'P')
+			cub->grid[cub->ennemy.pos.y][cub->ennemy.pos.x] = '0';
 		cub->ennemy.pos.y += 1;
-		cub->ennemy.orientation = 1;
 	}
-	else if(cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x + 1] == '0')
+	else if(cub->ennemy.orientation == 2 && cub->grid[cub->ennemy.pos.y][cub->ennemy.pos.x + 1] == '0')
 	{
-		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x + 1] = 'X';
-		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x] = '0';
+		cub->grid[cub->ennemy.pos.y][cub->ennemy.pos.x + 1] = 'X';
+		if(cub->grid[cub->ennemy.pos.y][cub->ennemy.pos.x] != 'P')
+			cub->grid[cub->ennemy.pos.y][cub->ennemy.pos.x] = '0';
 		cub->ennemy.pos.x += 1;
-		cub->ennemy.orientation = 2;
 	}
-	else if(cub->grid[(int)cub->ennemy.pos.y - 1][(int)cub->ennemy.pos.x] == '0')
+	else if(cub->ennemy.orientation == 3 && cub->grid[cub->ennemy.pos.y - 1][cub->ennemy.pos.x] == '0')
 	{
-		cub->grid[(int)cub->ennemy.pos.y - 1][(int)cub->ennemy.pos.x] = 'X';
-		cub->grid[(int)cub->ennemy.pos.y][(int)cub->ennemy.pos.x] = '0';
+		cub->grid[cub->ennemy.pos.y - 1][cub->ennemy.pos.x] = 'X';
+		if(cub->grid[cub->ennemy.pos.y][cub->ennemy.pos.x] != 'P')
+			cub->grid[cub->ennemy.pos.y][cub->ennemy.pos.x] = '0';
 		cub->ennemy.pos.y -= 1;
-		cub->ennemy.orientation = 3;
 	}
+	cub->ennemy_limit_move--;
+	if((new_x == cub->ennemy.old_pos.x && new_y == cub->ennemy.old_pos.y) && (cub->ennemy.pos.x == player->old_pos.x && cub->ennemy.pos.y == player->old_pos.y))
+	{
+		printf("GAME OVER: The Weird Wizard found you\n");
+		end_cub(cub);
+	}
+	//printf("Total action : %d", cub->total_action);
 }
 
 /*

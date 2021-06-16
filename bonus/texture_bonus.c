@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:21:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/15 17:23:17 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/16 13:49:22 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_texture(t_cub *cub)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 8)
@@ -33,7 +33,7 @@ void	init_texture(t_cub *cub)
 
 void	free_texture(t_cub *cub)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < 8)
@@ -52,7 +52,7 @@ void	free_texture(t_cub *cub)
 	}
 }
 
-int		new_fill_texture(t_cub *cub)
+int	new_fill_texture(t_cub *cub)
 {
 	cub->text[0].name = ft_strdup("./textures/player.xpm");
 	cub->text[1].name = ft_strdup("./textures/collect.xpm");
@@ -65,9 +65,9 @@ int		new_fill_texture(t_cub *cub)
 	return (1);
 }
 
-int		load_texture(t_cub *cub)
+int	load_texture(t_cub *cub)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	new_fill_texture(cub);
@@ -76,12 +76,12 @@ int		load_texture(t_cub *cub)
 		if (cub->text[i].name)
 		{
 			cub->text[i].ptr = mlx_xpm_file_to_image(cub->win.mlx_p,
-				cub->text[i].name, &cub->text[i].wid, &cub->text[i].hei);
+					cub->text[i].name, &cub->text[i].wid, &cub->text[i].hei);
 			if (!cub->text[i].ptr)
 				return (is_error("Bad texture content"));
 			cub->text[i].data = mlx_get_data_addr(cub->text[i].ptr,
-				&cub->text[i].bits_per_pixel, &cub->text[i].line_length,
-				&cub->text[i].endian);
+					&cub->text[i].bits_per_pixel, &cub->text[i].line_length,
+					&cub->text[i].endian);
 		}
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 02:37:21 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/15 17:43:38 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/16 13:51:29 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	render_lol(t_cub *cub)
 	int				top_px;
 	int				bot_px;
 	int				i;
-
 	void *img;
 	void *win;
 	int image_width;
@@ -40,41 +39,49 @@ int	render_lol(t_cub *cub)
 	else
 		player_text = cub->text[5].name;
 	i = 0;
-	int j = 0;
+	int j;
+	cub->first_display = 0;
+	i = 0;
 	while(i < cub->data.rows)
 	{
 		j = 0;
 		while(j < cub->data.cols)
 		{
-			if(cub->grid[i][j] == '1')
+				if(cub->grid[i][j] == '1')
 			{
 				img = mlx_xpm_file_to_image(cub->win.mlx_p, cub->text[3].name, &image_width, &image_height);
     			mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p, img, j * (cub->win.wid / cub->data.cols), i * (cub->win.hei / cub->data.rows));
-			}
-			else if (cub->grid[i][j] == 'P')
-			{
-				img = mlx_xpm_file_to_image(cub->win.mlx_p, player_text, &image_width, &image_height);
-    			mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p, img, cub->player.pos.x * (cub->win.wid / cub->data.cols), cub->player.pos.y * (cub->win.hei / cub->data.rows));
+				mlx_destroy_image(cub->win.mlx_p, img);
 			}
 			else if (cub->grid[i][j] == 'E')
 			{
 				img = mlx_xpm_file_to_image(cub->win.mlx_p, cub->text[2].name, &image_width, &image_height);
     			mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p, img, j * (cub->win.wid / cub->data.cols), i * (cub->win.hei / cub->data.rows));
+				mlx_destroy_image(cub->win.mlx_p, img);
 			}
 			else if (cub->grid[i][j] == 'C')
 			{
 				img = mlx_xpm_file_to_image(cub->win.mlx_p, cub->text[1].name, &image_width, &image_height);
     			mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p, img, j * (cub->win.wid / cub->data.cols), i * (cub->win.hei / cub->data.rows));
+				mlx_destroy_image(cub->win.mlx_p, img);
 			}
-			else if (cub->grid[i][j] == '0')
+			if (cub->grid[i][j] == 'P')
 			{
-				img = mlx_xpm_file_to_image(cub->win.mlx_p, cub->text[4].name, &image_width, &image_height);
-    			mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p, img, j * (cub->win.wid / cub->data.cols), i * (cub->win.hei / cub->data.rows));
+				img = mlx_xpm_file_to_image(cub->win.mlx_p, player_text, &image_width, &image_height);
+    			mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p, img, cub->player.pos.x * (cub->win.wid / cub->data.cols), cub->player.pos.y * (cub->win.hei / cub->data.rows));
+				mlx_destroy_image(cub->win.mlx_p, img);
 			}
 			else if (cub->grid[i][j] == 'X')
 			{
 				img = mlx_xpm_file_to_image(cub->win.mlx_p, ennemy_text, &image_width, &image_height);
     			mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p, img, j * (cub->win.wid / cub->data.cols), i * (cub->win.hei / cub->data.rows));
+				mlx_destroy_image(cub->win.mlx_p, img);
+			}
+			else if (cub->grid[i][j] == '0')
+			{
+				img = mlx_xpm_file_to_image(cub->win.mlx_p, cub->text[4].name, &image_width, &image_height);
+    			mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p, img, j * (cub->win.wid / cub->data.cols), i * (cub->win.hei / cub->data.rows));
+				mlx_destroy_image(cub->win.mlx_p, img);
 			}
 			j++;
 		}

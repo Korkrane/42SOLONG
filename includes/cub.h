@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:27:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/15 17:49:27 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/16 13:23:47 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@
 
 typedef struct	s_pos
 {
-	float		x;
-	float		y;
+	int			x;
+	int			y;
+	//float			x;
+	//float			y;
 }				t_pos;
 
 typedef struct	s_player
@@ -71,6 +73,7 @@ typedef struct	s_player
 	int			turn_d;
 	int			rot_d;
 	t_pos		pos;
+	t_pos		old_pos;
 	int			orientation;
 }				t_player;
 
@@ -210,10 +213,14 @@ typedef struct	s_cub
 	t_data		data;
 	int			save;
 	t_win		win;
+	t_win		bg;
 	int			ray_load;
 	int			sprt_load;
 	int			mlx_load;
 	int			total_action;
+	int			ennemy_limit_move;
+	int			ennemy_limit_index;
+	int 		first_display;
 }				t_cub;
 
 t_bmp			fill_bmp(t_cub *cub);
@@ -238,7 +245,7 @@ void			my_mlx_pixel_put(t_win *win, int x, int y, int color);
 void			rect(t_cub *cub, t_pos a, t_pos b, int color);
 void			square(t_pos pos, int size, t_cub *cub, int color);
 void			render_line(t_line *line, t_cub *cub, int color);
-int				grid_is_wall(float x, float y, t_cub *cub);
+int				grid_is_wall(int x, int y, t_cub *cub);
 float			normalize(float ray_ang);
 float			p_dist(float x1, float y1, float x2, float y2);
 int				grep_color(t_text text, int x, int y);

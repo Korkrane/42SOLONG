@@ -6,13 +6,13 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:04:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/15 16:59:23 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/16 13:46:57 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-int		key_pressed(int key, t_cub *cub)
+int	key_pressed(int key, t_cub *cub)
 {
 	if (key == KEY_Z || key == KEY_UP || key == KEY_W)
 		cub->player.walk_d = 1;
@@ -35,10 +35,10 @@ int		key_pressed(int key, t_cub *cub)
 	return (0);
 }
 
-int		key_released(int key, t_player *player)
+int	key_released(int key, t_player *player)
 {
-	if (key == KEY_Z || key == KEY_S || key == KEY_UP ||
-			key == KEY_DOWN || key == KEY_W)
+	if (key == KEY_Z || key == KEY_S || key == KEY_UP
+		|| key == KEY_DOWN || key == KEY_W)
 		player->walk_d = 0;
 	else if (key == KEY_LEFT || key == KEY_RIGHT)
 		player->lateral_d = 0;
