@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 23:50:20 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/16 13:48:10 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/16 16:55:56 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ void	init_cub(t_cub *cub, char *map)
 	init_player(&cub->player);
 	init_player(&cub->ennemy);
 	init_texture(cub);
-	cub->ray_load = 0;
-	cub->sprt_load = 0;
 	cub->mlx_load = 0;
 	cub->data.txtr_err = 0;
+	cub->data.exit_number = 0;
 	cub->total_action = 0;
+	cub->data.collect_number = 0;
+	cub->ennemy_text = NULL;
+	cub->player_text = NULL;
 	load_cub(cub, map);
 }
 
@@ -39,8 +41,6 @@ void	init_cub(t_cub *cub, char *map)
 int	end_cub(t_cub *cub)
 {
 	free_texture(cub);
-	if (cub->ray_load == 1)
-		free(cub->rays);
 	if (cub->data.rows)
 		free_grid(cub);
 	if (cub->win.img.img)
@@ -61,13 +61,15 @@ void	load_cub(t_cub *cub, char *map)
 	cub->win.mlx_p = mlx_init();
 	if (parsing(cub, map, &list))
 	{
-		if (!grid_parsing(cub, list) || !check_missing(cub) || !load_texture(cub))
+		if (!grid_parsing(cub, list) || !check_missing(cub)
+			|| !load_texture(cub))
 			end_cub(cub);
 		cub->ennemy_limit_move = 4;
 		cub->ennemy.orientation = 0;
-		cub->first_display = 1;
 		cub->player.old_pos.x = cub->player.pos.x;
 		cub->player.old_pos.y = cub->player.pos.y;
+		printf("You enter in a new dimension, take all the food before \
+				the Weird Wizard finds you and escape !\n");
 		run_cub(cub);
 	}
 	else
@@ -92,17 +94,14 @@ void	run_cub(t_cub *cub)
 	mlx_loop(cub->win.mlx_p);
 }
 
-int		main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_cub	cub;
 
 	if (ac == 2)
 	{
 		if (cub_ext(av[1]))
-		{
-			cub.save = 0;
 			init_cub(&cub, av[1]);
-		}
 		return (0);
 	}
 	else

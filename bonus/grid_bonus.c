@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:19:13 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/16 13:50:53 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/16 16:33:59 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,7 @@ void	init_grid(t_cub *cub)
 {
 	cub->data.rows = 0;
 	cub->data.cols = 0;
-	cub->data.ceil = 0;
-	cub->data.floor = 0;
 	cub->data.grid_flag = 0;
-	cub->data.res = 0;
-	cub->data.dist_pplane = 0.0;
-	cub->data.num_sprt = 0;
 }
 
 void	free_grid(t_cub *cub)

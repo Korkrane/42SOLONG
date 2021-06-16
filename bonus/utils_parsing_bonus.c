@@ -6,14 +6,14 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:43:26 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/16 13:50:28 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/16 16:40:35 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
 /*
-** PARse each line of the map and save the length of the longest one.
+** Parse each line of the map and save the length of the longest one.
 */
 
 int	count_cols(t_list *list)

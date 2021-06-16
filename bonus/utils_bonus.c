@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 01:18:48 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/16 13:45:11 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/16 16:47:18 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,12 @@ int	grid_is_wall(int x, int y, t_cub *cub)
 		return (1);
 	else
 		return (0);
+}
+
+void	set_old_position(t_cub *cub, t_player *player)
+{
+	player->old_pos.x = player->pos.x;
+	player->old_pos.y = player->pos.y;
+	cub->ennemy.old_pos.x = cub->ennemy.pos.x;
+	cub->ennemy.old_pos.y = cub->ennemy.pos.y;
 }
