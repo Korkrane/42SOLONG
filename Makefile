@@ -6,11 +6,11 @@
 #    By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/11 12:08:52 by bahaas            #+#    #+#              #
-#    Updated: 2021/06/17 19:23:53 by bahaas           ###   ########.fr        #
+#    Updated: 2021/06/17 20:15:49 by bahaas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= cub3D
+NAME	= so_long
 
 SRCS		= srcs/main.c srcs/grid.c srcs/images.c \
 			srcs/player.c srcs/window.c srcs/parsing.c \
@@ -18,7 +18,7 @@ SRCS		= srcs/main.c srcs/grid.c srcs/images.c \
 		 	srcs/utils.c srcs/grid_parsing.c \
 			srcs/utils_render.c srcs/key_events.c srcs/render.c 
 
-SRCS_BONUS	= bonus/main.c bonus/grid_bonus.c bonus/images_bonus.c \
+SRCS_BONUS	= bonus/main_bonus.c bonus/grid_bonus.c bonus/images_bonus.c \
 			bonus/player_bonus.c bonus/window_bonus.c bonus/parsing_bonus.c \
 			bonus/texture_bonus.c bonus/utils_parsing_bonus.c \
 			bonus/utils_bonus.c bonus/grid_parsing_bonus.c \

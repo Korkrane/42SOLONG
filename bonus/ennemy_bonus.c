@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 15:15:21 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/16 16:45:06 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:11:42 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,18 @@ int	check_ennemy(t_cub *cub)
 		while (cub->grid[y][++x])
 		{
 			if (ft_strchr("X", cub->grid[y][x]))
-			{
 				pos_player(&cub->ennemy, x, y);
-			}
 		}
 	}
 	if (cub->ennemy_limit_move == 0)
 		cub->ennemy_limit_move = 4;
 	if (cub->ennemy_limit_move == 4)
 		cub->ennemy.orientation = rand() % (5 - 1);
-	update_ennemy_x(cub);
-	update_ennemy_y(cub);
+	if(cub->ennemy.pos.x != -1)
+	{
+		update_ennemy_x(cub);
+		update_ennemy_y(cub);
+	}
 	cub->ennemy_limit_move--;
 	return (1);
 }

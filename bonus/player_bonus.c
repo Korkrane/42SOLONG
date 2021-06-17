@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:13:53 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/16 16:55:10 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:14:28 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	valid_move(t_cub *cub, int new_x, int new_y, t_player *player)
 		end_cub(cub);
 	}
 	else if (cub->grid[new_y][new_x] == 'E' && cub->data.collect_number > 0)
-		printf("\nBro... don't leave without all the makis...\n");
+		printf("\nBro... don't leave without all the food...\n");
 	else
 	{
 		cub->total_action++;
@@ -51,7 +51,10 @@ void	update(t_cub *cub, t_player *player)
 	new_x = player->pos.x + player->lateral_d;
 	new_y = player->pos.y - player->walk_d;
 	if (!grid_is_wall(new_x, new_y, cub))
+	{
 		valid_move(cub, new_x, new_y, player);
+		printf("Moves: %d\n", cub->total_action);
+	}
 	check_ennemy(cub);
 	if (((new_x == cub->ennemy.old_pos.x && new_y == cub->ennemy.old_pos.y)
 			&& (cub->ennemy.pos.x == player->old_pos.x
@@ -61,7 +64,6 @@ void	update(t_cub *cub, t_player *player)
 		printf("\nGAME OVER: The Weird Wizard found you\n");
 		end_cub(cub);
 	}
-	printf("Moves: %d\n", cub->total_action);
 }
 
 void	pos_player(t_player *player, int x, int y)
