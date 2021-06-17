@@ -6,15 +6,15 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 22:52:08 by bahaas            #+#    #+#             */
-/*   Updated: 2020/11/18 18:27:49 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:29:53 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		count_digit(long i)
+static int	count_digit(long i)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (i == 0)
@@ -27,11 +27,11 @@ static int		count_digit(long i)
 	return (count);
 }
 
-static char		*reverse(char *str)
+static char	*reverse(char *str)
 {
-	int i;
-	int j;
-	int tmp;
+	int	i;
+	int	j;
+	int	tmp;
 
 	i = 0;
 	j = 0;
@@ -50,7 +50,7 @@ static char		*reverse(char *str)
 	return (str);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	long int	nb;
 	int			i;
@@ -65,8 +65,7 @@ char			*ft_itoa(int n)
 		tot_len = 1;
 	}
 	tot_len += count_digit(nb);
-	if (!(str = malloc(sizeof(char) * (tot_len + 1))))
-		return (NULL);
+	str = malloc(sizeof(char) * (tot_len + 1));
 	i = 0;
 	if (n < 0)
 		str[i++] = '-';

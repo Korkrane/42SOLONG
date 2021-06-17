@@ -6,24 +6,24 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 11:28:42 by bahaas            #+#    #+#             */
-/*   Updated: 2020/11/17 14:43:11 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:17:43 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
-	int sign;
-	int res;
-	int i;
+	int	sign;
+	int	res;
+	int	i;
 
 	i = 0;
 	res = 0;
 	sign = 1;
 	while (nptr[i] == ' ' || nptr[i] == '\t' || nptr[i] == '\v'
-			|| nptr[i] == '\n' || nptr[i] == '\f'
-			|| nptr[i] == '\r')
+		|| nptr[i] == '\n' || nptr[i] == '\f'
+		|| nptr[i] == '\r')
 		i++;
 	if (nptr[i] == '+' || nptr[i] == '-')
 	{

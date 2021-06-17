@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 22:52:14 by bahaas            #+#    #+#             */
-/*   Updated: 2020/11/18 17:52:05 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:30:25 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_calloc(1, 1));
 	if (start + len > ft_strlen(s))
 		len = ft_strlen(s) - start;
-	if (!(str = malloc(sizeof(char) * (len + 1))))
+	str = malloc(sizeof(char) * (len + 1));
+	if (!(str))
 		return (NULL);
 	while (i < len)
 	{

@@ -6,17 +6,17 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 01:10:48 by bahaas            #+#    #+#             */
-/*   Updated: 2020/11/19 15:58:23 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:27:21 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		count_words(char *str, char c)
+static int	count_words(char *str, char c)
 {
-	int i;
-	int w_len;
-	int count_w;
+	int	i;
+	int	w_len;
+	int	count_w;
 
 	i = 0;
 	count_w = 0;
@@ -36,9 +36,9 @@ static int		count_words(char *str, char c)
 	return (count_w);
 }
 
-static char		*ft_strncat(char *str, char *new_str, int n)
+static char	*ft_strncat(char *str, char *new_str, int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] && i < n)
@@ -50,11 +50,11 @@ static char		*ft_strncat(char *str, char *new_str, int n)
 	return (new_str);
 }
 
-static char		**ft_create(char **split, char c, int count_w, char *str)
+static char	**ft_create(char **split, char c, int count_w, char *str)
 {
-	int i;
-	int j;
-	int w_len;
+	int	i;
+	int	j;
+	int	w_len;
 
 	i = 0;
 	j = 0;
@@ -75,7 +75,7 @@ static char		**ft_create(char **split, char c, int count_w, char *str)
 	return (split);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int		count_w;
 	char	**split;

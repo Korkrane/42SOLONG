@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 22:52:07 by bahaas            #+#    #+#             */
-/*   Updated: 2020/11/05 15:46:02 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:18:29 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void *new_array;
+	void	*new_array;
 
 	new_array = NULL;
 	new_array = malloc(nmemb * sizeof(size));

@@ -6,25 +6,25 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 22:52:12 by bahaas            #+#    #+#             */
-/*   Updated: 2020/11/19 16:20:27 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:26:44 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_tot_len(char const *s1, char const *s2)
+static int	ft_tot_len(char const *s1, char const *s2)
 {
-	int tot_len;
+	int	tot_len;
 
 	tot_len = 0;
 	tot_len += ft_strlen(s1) + ft_strlen(s2);
 	return (tot_len);
 }
 
-static char		*ft_strcat(char *dest, char const *src)
+static char	*ft_strcat(char *dest, char const *src)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -39,13 +39,13 @@ static char		*ft_strcat(char *dest, char const *src)
 	return (dest);
 }
 
-static void		ft_create(char *newstr, char const *s1, char const *s2)
+static void	ft_create(char *newstr, char const *s1, char const *s2)
 {
 	ft_strcat(newstr, s1);
 	ft_strcat(newstr, s2);
 }
 
-char			*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*fillstr;
 	int		tot_len;

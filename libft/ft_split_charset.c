@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 14:34:39 by bahaas            #+#    #+#             */
-/*   Updated: 2021/02/25 18:11:10 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:26:12 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	is_charset(char c, char *charset)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (charset[i])
@@ -28,9 +28,9 @@ static int	is_charset(char c, char *charset)
 
 static int	count_word_w_charset(char *str, char *charset)
 {
-	int i;
-	int w_count;
-	int w_length;
+	int	i;
+	int	w_count;
+	int	w_length;
 
 	i = 0;
 	w_count = 0;
@@ -52,7 +52,7 @@ static int	count_word_w_charset(char *str, char *charset)
 
 static char	*fill_str(char *new_str, char *old_str, int len_to_malloc)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (old_str[i] && i < len_to_malloc)
@@ -66,9 +66,9 @@ static char	*fill_str(char *new_str, char *old_str, int len_to_malloc)
 
 static char	**create_str(char *str, char *charset, int w_count, char **new_tab)
 {
-	int i;
-	int j;
-	int w_len;
+	int	i;
+	int	j;
+	int	w_len;
 
 	i = 0;
 	j = 0;
@@ -89,7 +89,7 @@ static char	**create_str(char *str, char *charset, int w_count, char **new_tab)
 	return (new_tab);
 }
 
-char		**ft_split_charset(char *str, char *charset)
+char	**ft_split_charset(char *str, char *charset)
 {
 	char	**new_tab;
 	int		w_count;

@@ -6,16 +6,16 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 11:37:09 by bahaas            #+#    #+#             */
-/*   Updated: 2021/01/31 18:45:49 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:22:37 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_check_base(char *base)
+int	ft_check_base(char *base)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	if (base[0] == '\0' || base[1] == '\0')
@@ -33,17 +33,17 @@ int			ft_check_base(char *base)
 	while (base[i])
 	{
 		if (base[i] == '+' || base[i] == '-' || (base[i] == ' '
-				|| base[i] == '\t' || base[i] == '\v' ||
-				base[i] == '\n' || base[i] == '\r' || base[i] == '\f'))
+				|| base[i] == '\t' || base[i] == '\v'
+				|| base[i] == '\n' || base[i] == '\r' || base[i] == '\f'))
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int			ft_check_in_base(char c, char *base)
+int	ft_check_in_base(char c, char *base)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (base[i])
@@ -57,16 +57,16 @@ int			ft_check_in_base(char c, char *base)
 
 long int	ft_parse_whitespaces(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\v' ||
-				str[i] == '\n' || str[i] == '\r' || str[i] == '\f')
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\v'
+		|| str[i] == '\n' || str[i] == '\r' || str[i] == '\f')
 		i++;
 	return (i);
 }
 
-int			ft_atoi_base(char *str, char *base)
+int	ft_atoi_base(char *str, char *base)
 {
 	long int	tot;
 	long int	sign;

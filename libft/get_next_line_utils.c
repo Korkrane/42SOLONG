@@ -6,13 +6,13 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 13:24:58 by bahaas            #+#    #+#             */
-/*   Updated: 2021/02/05 02:34:02 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:27:56 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char			*ft_strnew(size_t size)
+char	*ft_strnew(size_t size)
 {
 	char		*str;
 	size_t		i;
@@ -28,7 +28,7 @@ char			*ft_strnew(size_t size)
 	return (str);
 }
 
-void			*ft_memmove(void *dest, const void *src, size_t len)
+void	*ft_memmove(void *dest, const void *src, size_t len)
 {
 	char		*d;
 	char		*s;
@@ -48,7 +48,7 @@ void			*ft_memmove(void *dest, const void *src, size_t len)
 	return (dest);
 }
 
-char			*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char		*dest;
 	int			size_s1;

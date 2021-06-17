@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 22:52:09 by bahaas            #+#    #+#             */
-/*   Updated: 2020/11/18 10:39:54 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:31:24 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list *second_lst;
-	t_list *new;
+	t_list	*second_lst;
+	t_list	*new;
 
 	second_lst = NULL;
 	while (lst)
 	{
-		if ((new = ft_lstnew((*f)(lst->content))) == NULL)
+		new = ft_lstnew((*f)(lst->content));
+		if (new == NULL)
 		{
 			ft_lstclear(&second_lst, del);
 			return (NULL);

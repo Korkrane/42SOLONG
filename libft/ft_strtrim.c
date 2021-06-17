@@ -6,15 +6,15 @@
 /*   By: bahaas <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 11:33:16 by bahaas            #+#    #+#             */
-/*   Updated: 2020/11/20 15:50:51 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:21:38 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		is_in_charset(char c, char const *set)
+static int	is_in_charset(char c, char const *set)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (set[i])
@@ -26,9 +26,9 @@ static int		is_in_charset(char c, char const *set)
 	return (0);
 }
 
-static int		start_position(char const *s1, char const *set)
+static int	start_position(char const *s1, char const *set)
 {
-	int pos;
+	int	pos;
 
 	pos = 0;
 	while (is_in_charset(s1[pos], set))
@@ -36,9 +36,9 @@ static int		start_position(char const *s1, char const *set)
 	return (pos);
 }
 
-static int		end_position(char const *s1, char const *set)
+static int	end_position(char const *s1, char const *set)
 {
-	int pos;
+	int	pos;
 
 	pos = ft_strlen(s1) - 1;
 	while (is_in_charset(s1[pos], set))
@@ -46,7 +46,7 @@ static int		end_position(char const *s1, char const *set)
 	return (pos);
 }
 
-char			*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*str;
 	int		trim_len;
