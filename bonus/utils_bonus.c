@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../includes/solong_bonus.h"
 
 /*
 ** Check if [y,x] position is a wall or not.

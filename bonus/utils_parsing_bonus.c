@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../includes/solong_bonus.h"
 
 /*
 ** Parse each line of the map and save the length of the longest one.

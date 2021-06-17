@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../includes/solong_bonus.h"
 
 /*
 ** We are checking all the positions around the position we currently are.

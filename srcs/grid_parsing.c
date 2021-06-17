@@ -6,11 +6,11 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:59:14 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/11 03:09:12 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 19:14:14 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../includes/solong.h"
 
 /*
 ** We are checking all the positions around the position we currently are.
@@ -18,7 +18,7 @@
 ** or is a ' ', we have an invalid map.
 */
 
-int		check_surrounding(char **grid, int x, int y)
+int	check_surrounding(char **grid, int x, int y)
 {
 	if (grid[y + 1][x] == ' '
 			|| grid[y - 1][x] == ' '
@@ -37,13 +37,21 @@ int		check_surrounding(char **grid, int x, int y)
 	return (1);
 }
 
+void	count_exit_and_collect(t_cub *cub, char c)
+{
+	if (ft_strchr("E", c))
+		cub->data.exit_number++;
+	if (ft_strchr("C", c))
+		cub->data.collect_number++;
+}
+
 /*
 ** If the char we check is 0 or 2 & is on border of the map or his surrounding
 ** positions aren't valid. Map isn't closed.
 ** Then we check if the char isn't something else than a valid map char.
 */
 
-int		is_grid(t_cub *cub, int rows, int y, int len)
+int	is_grid(t_cub *cub, int rows, int y, int len)
 {
 	int		x;
 	int		next_row;
@@ -65,10 +73,7 @@ int		is_grid(t_cub *cub, int rows, int y, int len)
 			return (is_error("Map is not fully closed"));
 		if (!ft_strchr("01CEP", cub->grid[y][x]))
 			return (is_error("Invalid char in map"));
-		if (ft_strchr("E", cub->grid[y][x]))
-			cub->data.exit_number++;
-		if (ft_strchr("C", cub->grid[y][x]))
-			cub->data.collect_number++;
+		count_exit_and_collect(cub, cub->grid[y][x]);
 	}
 	return (1);
 }
@@ -77,7 +82,7 @@ int		is_grid(t_cub *cub, int rows, int y, int len)
 ** Check the validity of each rows in the map & if there isn't empty columns.
 */
 
-int		check_grid(t_cub *cub)
+int	check_grid(t_cub *cub)
 {
 	int		y;
 	int		len;

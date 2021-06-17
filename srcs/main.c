@@ -6,12 +6,11 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 23:50:20 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/15 16:20:34 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 19:16:32 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "../includes/cub.h"
-
+#include "../includes/solong.h"
 
 /*
 ** Init all of our ressources and then start the game.
@@ -24,11 +23,12 @@ void	init_cub(t_cub *cub, char *map)
 	init_grid(cub);
 	init_player(&cub->player);
 	init_texture(cub);
-	cub->ray_load = 0;
-	cub->sprt_load = 0;
 	cub->mlx_load = 0;
 	cub->data.txtr_err = 0;
+	cub->data.exit_number = 0;
 	cub->total_action = 0;
+	cub->data.collect_number = 0;
+	cub->player_text = NULL;
 	load_cub(cub, map);
 }
 
@@ -36,13 +36,9 @@ void	init_cub(t_cub *cub, char *map)
 ** Free all of our ressources.
 */
 
-int		end_cub(t_cub *cub)
+int	end_cub(t_cub *cub)
 {
 	free_texture(cub);
-	if (cub->sprt_load == 1)
-		free_sprt(cub);
-	if (cub->ray_load == 1)
-		free(cub->rays);
 	if (cub->data.rows)
 		free_grid(cub);
 	if (cub->win.img.img)
@@ -63,12 +59,12 @@ void	load_cub(t_cub *cub, char *map)
 	cub->win.mlx_p = mlx_init();
 	if (parsing(cub, map, &list))
 	{
-		if (!grid_parsing(cub, list) || !check_missing(cub) || !load_texture(cub) || !load_sprt(cub))
+		if (!grid_parsing(cub, list) || !check_missing(cub)
+			|| !load_texture(cub))
 			end_cub(cub);
-		printf("So_long is launching..\n");
-		printf("player pos : [%f:%f]\n", cub->player.pos.x, cub->player.pos.y);
-		//cub->win.wid = 1920;
-		//cub->win.hei = 1080;
+		cub->player.old_pos.x = cub->player.pos.x;
+		cub->player.old_pos.y = cub->player.pos.y;
+		printf("You enter in a new dimension, take food before leaving.\n\n");
 		run_cub(cub);
 	}
 	else
@@ -89,22 +85,18 @@ void	run_cub(t_cub *cub)
 	mlx_hook(cub->win.win_p, 3, 1L << 1, key_released, &cub->player);
 	mlx_hook(cub->win.win_p, 2, 1L << 0, key_pressed, cub);
 	mlx_loop_hook(cub->win.mlx_p, render_lol, cub);
-	mlx_string_put(cub->win.mlx_p, cub->win.win_p, 50, 50, WHITE, ft_itoa(cub->total_action));
 	mlx_hook(cub->win.win_p, 33, 1L << 17, &end_cub, cub);
 	mlx_loop(cub->win.mlx_p);
 }
 
-int		main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_cub cub;
+	t_cub	cub;
 
 	if (ac == 2)
 	{
 		if (cub_ext(av[1]))
-		{
-			cub.save = 0;
 			init_cub(&cub, av[1]);
-		}
 		return (0);
 	}
 	else

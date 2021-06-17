@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../includes/solong_bonus.h"
 
 /*
 ** Render pixel on the image.

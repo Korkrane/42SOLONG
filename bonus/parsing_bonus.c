@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../includes/solong_bonus.h"
 
 /*
 ** Each line of the map is saved into a list element and added at the end

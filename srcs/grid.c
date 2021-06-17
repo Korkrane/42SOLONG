@@ -6,27 +6,22 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:19:13 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/11 01:23:12 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/16 16:33:59 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../includes/solong.h"
 
 void	init_grid(t_cub *cub)
 {
 	cub->data.rows = 0;
 	cub->data.cols = 0;
-	cub->data.ceil = 0;
-	cub->data.floor = 0;
 	cub->data.grid_flag = 0;
-	cub->data.res = 0;
-	cub->data.dist_pplane = 0.0;
-	cub->data.num_sprt = 0;
 }
 
 void	free_grid(t_cub *cub)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < cub->data.rows)
@@ -41,9 +36,9 @@ void	free_grid(t_cub *cub)
 ** Duplicate the content of my list in my cub structure.
 */
 
-int		fill_grid(t_cub *cub, t_list *list)
+int	fill_grid(t_cub *cub, t_list *list)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (list)
@@ -60,10 +55,10 @@ int		fill_grid(t_cub *cub, t_list *list)
 ** the map parameter then fill it in my cub structure.
 */
 
-int		grid_alloc(t_cub *cub, t_list *list)
+int	grid_alloc(t_cub *cub, t_list *list)
 {
-	int cols;
-	int rows;
+	int	cols;
+	int	rows;
 
 	cols = count_cols(list);
 	rows = ft_lstsize(list);
@@ -82,17 +77,15 @@ int		grid_alloc(t_cub *cub, t_list *list)
 ** Malloc and fill my map. Then check if it's a valid map.
 */
 
-int		grid_parsing(t_cub *cub, t_list *list)
+int	grid_parsing(t_cub *cub, t_list *list)
 {
 	if (!grid_alloc(cub, list))
 	{
 		ft_lstclear(&list, &ft_free);
 		return (0);
 	}
-	printf("grid alloc OK\n");
 	ft_lstclear(&list, &ft_free);
-	if (!check_player(cub) || !check_grid(cub) || !check_sprt(cub))
+	if (!check_player(cub) || !check_grid(cub))
 		return (0);
-	printf("grid_parsing return 1\n");
 	return (1);
 }

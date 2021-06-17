@@ -6,82 +6,71 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:13:53 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/15 16:06:31 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 19:16:05 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../includes/solong.h"
 
 void	init_player(t_player *player)
 {
 	player->pos.x = -1;
 	player->pos.y = -1;
-	player->turn_d = 0;
 	player->walk_d = 0;
 	player->lateral_d = 0;
-	player->rot_ang = 0;
-	player->mov_speed = 1;
-	player->rot_speed = 0;
+	player->orientation = 0;
 }
 
-/*
-** After each movement. Determine the new position of our player.
-** Knowing our player rotation angle and lenght of his step. We can find x & y
-** with cos and sin.
-*/
-
-void	update(t_cub *cub, t_player *player)
+void	valid_move(t_cub *cub, int new_x, int new_y, t_player *player)
 {
-	float new_x;
-	float new_y;
-
-	new_x = player->pos.x +  player->lateral_d;
-	new_y = player->pos.y - player->walk_d;
-	if (!grid_is_wall(new_x, new_y, cub))
+	if (cub->grid[new_y][new_x] == 'C')
+		cub->data.collect_number--;
+	if (cub->grid[new_y][new_x] == 'E' && cub->data.collect_number == 0)
 	{
-			//printf("new pos : y:%f, x:%f\n", new_y, new_x);
-			//printf("new pos value : %c\n", cub->grid[(int)new_y][(int)new_x]);
-			//printf("old pos : y:%f, x:%f\n", player->pos.y, player->pos.x);
-			cub->grid[(int)player->pos.y][(int)player->pos.x] = '0';
-			cub->grid[(int)new_y][(int)new_x] = 'P';
+		printf("\nEND: You left in another dimension\n");
+		end_cub(cub);
+	}
+	else if (cub->grid[new_y][new_x] == 'E' && cub->data.collect_number > 0)
+		printf("Bro... don't leave without all the food...\n");
+	else
+	{
+		cub->total_action++;
+		cub->grid[player->pos.y][player->pos.x] = '0';
+		cub->grid[new_y][new_x] = 'P';
 		cub->player.pos.x = new_x;
 		cub->player.pos.y = new_y;
-		cub->total_action++;
 	}
 }
 
-/*
-** Save player pos & orientation in our structure
-*/
+void	update(t_cub *cub, t_player *player)
+{
+	int	new_x;
+	int	new_y;
 
-void	pos_player(t_player *player, int x, int y, char orientation)
+	set_old_position(cub, player);
+	new_x = player->pos.x + player->lateral_d;
+	new_y = player->pos.y - player->walk_d;
+	if (!grid_is_wall(new_x, new_y, cub))
+	{
+		valid_move(cub, new_x, new_y, player);
+		printf("Moves: %d\n", cub->total_action);
+	}
+}
+
+void	pos_player(t_player *player, int x, int y)
 {
 	if (player->pos.x == -1 && player->pos.y == -1)
 	{
 		player->pos.x = x;
 		player->pos.y = y;
-		if (orientation == 'N')
-			player->rot_ang = 1.5 * M_PI;
-		else if (orientation == 'S')
-			player->rot_ang = M_PI / 2;
-		else if (orientation == 'E')
-			player->rot_ang = 0;
-		else if (orientation == 'W')
-			player->rot_ang = M_PI;
-		player->rot_ang = 0;
 	}
 }
 
-/*
-** After filling the map. We are looking at if there is only one player pos
-** & find his orientation.
-*/
-
-int		check_player(t_cub *cub)
+int	check_player(t_cub *cub)
 {
-	int x;
-	int y;
-	int num_position;
+	int	x;
+	int	y;
+	int	num_position;
 
 	y = -1;
 	num_position = 0;
@@ -92,7 +81,7 @@ int		check_player(t_cub *cub)
 		{
 			if (ft_strchr("P", cub->grid[y][x]))
 			{
-				pos_player(&cub->player, x, y, cub->grid[y][x]);
+				pos_player(&cub->player, x, y);
 				num_position++;
 				if (num_position > 1)
 					return (is_error("Multiple player position in map"));

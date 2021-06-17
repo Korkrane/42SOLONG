@@ -6,18 +6,17 @@
 #    By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/11 12:08:52 by bahaas            #+#    #+#              #
-#    Updated: 2021/06/16 16:51:28 by bahaas           ###   ########.fr        #
+#    Updated: 2021/06/17 19:23:53 by bahaas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3D
 
-SRCS		= srcs/main.c srcs/grid_bonus.c srcs/images_bonus.c \
-			srcs/player_bonus.c srcs/window_bonus.c srcs/parsing_bonus.c \
-			srcs/texture_bonus.c srcs/utils_parsing_bonus.c srcs/sprites_bonus.c \
-			srcs/healthbar_bonus.c srcs/utils_bonus.c srcs/grid_parsing_bonus.c \
-			srcs/utils_render_bonus.c srcs/key_events_bonus.c srcs/render_bonus.c \
-			srcs/render_sprites_bonus.c
+SRCS		= srcs/main.c srcs/grid.c srcs/images.c \
+			srcs/player.c srcs/window.c srcs/parsing.c \
+			srcs/texture.c srcs/utils_parsing.c  \
+		 	srcs/utils.c srcs/grid_parsing.c \
+			srcs/utils_render.c srcs/key_events.c srcs/render.c 
 
 SRCS_BONUS	= bonus/main.c bonus/grid_bonus.c bonus/images_bonus.c \
 			bonus/player_bonus.c bonus/window_bonus.c bonus/parsing_bonus.c \
@@ -31,8 +30,8 @@ CFLAGS	= -Wextra -Werror -Wall -g
 RM		= rm -f
 LIB_D	= ./libft
 MLX_D	= ./minilibx
-HEADER	= -I /includes
-HEADER_BONUS	= -I /includes
+HEADER	= -I /includes/solong.h
+HEADER_BONUS	= -I /includes/solong_bonus.h
 OBJS	= ${SRCS:.c=.o}
 OBJS_BONUS	= ${SRCS_BONUS:.c=.o}
 
@@ -58,7 +57,7 @@ re:			fclean all
 
 bonus:		${OBJS_BONUS}
 			make -C ${LIB_D}
-			${CC} ${HEADER} ${OBJS_BONUS} -o ${NAME} -O -O3 -L ${LIB_D} -lft -L ${MLX_D} -lmlx -lXext -lX11 -lm
+			${CC} ${HEADER_BONUS} ${OBJS_BONUS} -o ${NAME} -O -O3 -L ${LIB_D} -lft -L ${MLX_D} -lmlx -lXext -lX11 -lm
 
 
 

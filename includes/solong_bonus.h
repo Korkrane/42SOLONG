@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub.h                                              :+:      :+:    :+:   */
+/*   solong_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:27:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/16 16:47:00 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/17 19:25:42 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB_H
-# define CUB_H
+#ifndef SOLONG_BONUS_H
+# define SOLONG_BONUS_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -42,13 +42,13 @@
 
 # define WHITE	0x00FFFFFF
 
-typedef struct	s_pos
+typedef struct s_pos
 {
 	int			x;
 	int			y;
 }				t_pos;
 
-typedef struct	s_player
+typedef struct s_player
 {
 	int			lateral_d;
 	int			walk_d;
@@ -57,7 +57,7 @@ typedef struct	s_player
 	int			orientation;
 }				t_player;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	int			bits_per_pixel;
 	int			line_length;
@@ -68,7 +68,7 @@ typedef struct	s_img
 	int			hei;
 }				t_img;
 
-typedef struct	s_win
+typedef struct s_win
 {
 	void		*mlx_p;
 	void		*win_p;
@@ -78,7 +78,7 @@ typedef struct	s_win
 	int			wid;
 }				t_win;
 
-typedef struct	s_text
+typedef struct s_text
 {
 	int				bits_per_pixel;
 	int				line_length;
@@ -90,18 +90,18 @@ typedef struct	s_text
 	int				hei;
 }				t_text;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	int				grid_flag;
 	int				txtr_err;
 	int				cols;
 	int				rows;
 	int				res;
-	int 			collect_number;
+	int				collect_number;
 	int				exit_number;
 }				t_data;
 
-typedef struct	s_sprt
+typedef struct s_sprt
 {
 	int			visibility;
 	int			texture;
@@ -115,7 +115,7 @@ typedef struct	s_sprt
 	float		pos_x;
 }				t_sprt;
 
-typedef struct	s_cub
+typedef struct s_cub
 {
 	t_text		text[8];
 	t_player	player;
