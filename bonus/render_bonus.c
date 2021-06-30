@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 02:37:21 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/30 19:26:31 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/30 21:03:52 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		grep_color(t_text text, int x, int y)
 
 void	fill_sprt_data(t_cub *cub, int j, int i, char *texture, int text_id)
 {
-	int k;
 	float top_px;
 	float bot_px;
 	float sprt_hei;
@@ -41,30 +40,47 @@ void	fill_sprt_data(t_cub *cub, int j, int i, char *texture, int text_id)
 
 	sprt_hei = cub->win.hei / cub->data.rows;
 	sprt_wid = cub->win.wid / cub->data.cols;
+	float right_px = sprt_wid;
 	top_px = i * sprt_hei;
 	bot_px = (i + 1) * sprt_hei;
 	pos_x = j * (cub->win.wid / cub->data.cols);
+	/*
 		printf("pillar[%d][%d] :\n", j, i);
 		printf("sprt_hei : %f\n", sprt_hei);
 		printf("sprt_wid : %f\n", sprt_wid);
 		printf("bot_px : %f\n", bot_px);
 		printf("top_px : %f\n", top_px);
+		printf("right_px : %f\n", right_px);
 		printf("pos_x : %f\n", pos_x);
+	*/
 	float text_x;
 	float text_y;
 	float screen_x;
 	float screen_y;
 
+	//static int print2 = 0;
 	screen_x = -1;
+	int o;
 	while(pos_x + screen_x < 0)
 		screen_x++;
-	while (++screen_x <= sprt_wid)
+	while (++screen_x <= right_px)
 	{
-		text_x = screen_x * cub->text[text_id].wid / sprt_wid;
+		text_x = screen_x * (cub->text[text_id].wid / sprt_wid);
 		screen_y = top_px - 1;
+		o = -1;
 		while(++screen_y < bot_px)
 		{
-			text_y = screen_y * cub->text[text_id].hei / sprt_hei;
+			++o;
+			text_y = (o * (cub->text[text_id].hei / sprt_hei));
+			//if(i != 0)
+			//	text_y = text_y - 6.4 * i;
+			//text_y = (screen_y) + (cub->text[text_id].hei / 2) - (cub->win.hei / 2) * (cub->text[text_id].hei / sprt_hei);
+			//text_y = (screen_y + (cub->text[text_id].hei / 2) - (cub->win.hei / 2)) * (cub->text[text_id].hei / sprt_hei);
+		//	if(print2 <= i + 2 && i != 0)
+		//	{
+		//		printf("\tTEXT_Y: %f\n", text_y);
+		//		print2++;
+		//	}
 			if (text_y < 0)
 				text_y = 0;
 			int		color;
@@ -72,75 +88,15 @@ void	fill_sprt_data(t_cub *cub, int j, int i, char *texture, int text_id)
 			color = grep_color(cub->text[text_id], text_x, text_y);
 			background = grep_color(cub->text[text_id], 0, 0);
 			if (color != background)
-			{
-				printf("draw one..\n");
 				my_mlx_pixel_put(&cub->win, pos_x + screen_x, screen_y, color);
-			}
 		}
-		printf("screen_y : %f\n", screen_y);
 	}
+	//printf("\n");
 }
 
 void	put_image(t_cub *cub, int j, int i, char *texture, int text_id)
 {
-	/*
-	   cub->img_d = mlx_xpm_file_to_image(cub->win.mlx_p, texture,
-	   &cub->image_width, &cub->image_height);
-	   mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p,
-	   cub->img_d, j * (cub->win.wid / cub->data.cols),
-	   i * (cub->win.hei / cub->data.rows));
-	   mlx_destroy_image(cub->win.mlx_p, cub->img_d);
-	   */
 	fill_sprt_data(cub, j, i, texture, text_id);
-	/*
-	int k = 0;
-	int wid = cub->win.wid / cub->data.cols;
-	while (++k < 800)
-	{
-		my_mlx_pixel_put(&cub->win, wid, k, BLUE);
-		my_mlx_pixel_put(&cub->win, wid*2, k, BLUE);
-		my_mlx_pixel_put(&cub->win, wid*3, k, BLUE);
-		my_mlx_pixel_put(&cub->win, wid*4, k, BLUE);
-		my_mlx_pixel_put(&cub->win, wid*5, k, BLUE);
-		my_mlx_pixel_put(&cub->win, wid*6, k, BLUE);
-		my_mlx_pixel_put(&cub->win, wid*7, k, BLUE);
-		my_mlx_pixel_put(&cub->win, wid*8, k, BLUE);
-		my_mlx_pixel_put(&cub->win, wid*9, k, BLUE);
-		my_mlx_pixel_put(&cub->win, wid*10, k, BLUE);
-		my_mlx_pixel_put(&cub->win, wid*11, k, BLUE);
-		my_mlx_pixel_put(&cub->win, wid*12, k, BLUE);
-		my_mlx_pixel_put(&cub->win, wid*13, k, BLUE);
-		my_mlx_pixel_put(&cub->win, wid*14, k, BLUE);
-		my_mlx_pixel_put(&cub->win, wid*15, k, BLUE);
-	}
-	k = 0;
-	wid = cub->win.hei / cub->data.rows;
-	while (++k < 800)
-	{
-		my_mlx_pixel_put(&cub->win, k, wid, BLUE);
-		my_mlx_pixel_put(&cub->win, k, wid*2, BLUE);
-		my_mlx_pixel_put(&cub->win, k, wid*3, BLUE);
-		my_mlx_pixel_put(&cub->win, k, wid*4, BLUE);
-		my_mlx_pixel_put(&cub->win, k, wid*5, BLUE);
-		my_mlx_pixel_put(&cub->win, k, wid*6, BLUE);
-		my_mlx_pixel_put(&cub->win, k, wid*7, BLUE);
-		my_mlx_pixel_put(&cub->win, k, wid*8, BLUE);
-		my_mlx_pixel_put(&cub->win, k, wid*9, BLUE);
-		my_mlx_pixel_put(&cub->win, k, wid*10, BLUE);
-		my_mlx_pixel_put(&cub->win, k, wid*11, BLUE);
-		my_mlx_pixel_put(&cub->win, k, wid*12, BLUE);
-		my_mlx_pixel_put(&cub->win, k, wid*13, BLUE);
-		my_mlx_pixel_put(&cub->win, k, wid*14, BLUE);
-		my_mlx_pixel_put(&cub->win, k, wid*15, BLUE);
-	}
-	*/
-	mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p, cub->win.img.img, 0, 0);
-	
-	/*
-	mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p,
-	   cub->win.img.img, j * (cub->win.wid / cub->data.cols),
-	   i * (cub->win.hei / cub->data.rows));
-	*/
 }
 
 void	render_sprites(t_cub *cub, int j, int i)
@@ -194,5 +150,6 @@ int	render_lol(t_cub *cub)
 		while (++j < cub->data.cols)
 			render_sprites(cub, j, i);
 	}
+	mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p, cub->win.img.img, 0, 0);
 	return (1);
 }
