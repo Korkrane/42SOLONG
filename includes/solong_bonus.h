@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:27:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/17 19:25:42 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/30 19:17:46 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define KEY_ESC	65307
 
 # define WHITE	0x00FFFFFF
+# define BLUE	0x000000FF
 
 typedef struct s_pos
 {
@@ -101,6 +102,7 @@ typedef struct s_data
 	int				exit_number;
 }				t_data;
 
+/*
 typedef struct s_sprt
 {
 	int			visibility;
@@ -114,6 +116,7 @@ typedef struct s_sprt
 	int			id;
 	float		pos_x;
 }				t_sprt;
+*/
 
 typedef struct s_cub
 {
@@ -127,8 +130,8 @@ typedef struct s_cub
 	int			total_action;
 	int			ennemy_limit_move;
 	int			ennemy_limit_index;
-	void		*img_d;
-	void		*win_d;
+//	void		*img_d;
+//	void		*win_d;
 	int			image_width;
 	int			image_height;
 	char		*player_text;

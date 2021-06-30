@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 15:15:21 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/17 20:11:42 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/23 12:33:36 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	check_ennemy(t_cub *cub)
 		cub->ennemy_limit_move = 4;
 	if (cub->ennemy_limit_move == 4)
 		cub->ennemy.orientation = rand() % (5 - 1);
-	if(cub->ennemy.pos.x != -1)
+	if (cub->ennemy.pos.x != -1)
 	{
 		update_ennemy_x(cub);
 		update_ennemy_y(cub);

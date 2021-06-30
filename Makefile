@@ -6,7 +6,7 @@
 #    By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/11 12:08:52 by bahaas            #+#    #+#              #
-#    Updated: 2021/06/17 20:15:49 by bahaas           ###   ########.fr        #
+#    Updated: 2021/06/30 15:29:31 by bahaas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,12 @@ SRCS_BONUS	= bonus/main_bonus.c bonus/grid_bonus.c bonus/images_bonus.c \
 			bonus/texture_bonus.c bonus/utils_parsing_bonus.c \
 			bonus/utils_bonus.c bonus/grid_parsing_bonus.c \
 			bonus/utils_render_bonus.c bonus/key_events_bonus.c bonus/render_bonus.c \
-			bonus/ennemy_bonus.c
+			bonus/ennemy_bonus.c \
+			bonus/modif.c
 
 CC		= gcc
-CFLAGS	= -Wextra -Werror -Wall -g
+#CFLAGS	= -Wextra -Werror -Wall -g
+CFLAGS	= -g
 RM		= rm -f
 LIB_D	= ./libft
 MLX_D	= ./minilibx

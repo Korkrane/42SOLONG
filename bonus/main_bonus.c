@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 23:50:20 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/16 16:55:56 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/23 12:35:12 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	load_cub(t_cub *cub, char *map)
 		cub->ennemy.orientation = 0;
 		cub->player.old_pos.x = cub->player.pos.x;
 		cub->player.old_pos.y = cub->player.pos.y;
-		printf("You enter in a new dimension, take all the food before \
-				the Weird Wizard finds you and escape !\n");
+		printf("You enter in a new dimension, take all the food before");
+		printf("the Weird Wizard finds you and escape !\n");
 		run_cub(cub);
 	}
 	else
