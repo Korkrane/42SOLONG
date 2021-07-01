@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_bonus.c                                    :+:      :+:    :+:   */
+/*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:21:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/16 13:49:22 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/01 17:46:21 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	new_fill_texture(t_cub *cub)
 	cub->text[1].name = ft_strdup("./textures/collect.xpm");
 	cub->text[2].name = ft_strdup("./textures/Nouveau-projet-_1_.xpm");
 	cub->text[3].name = ft_strdup("./textures/pillar.xpm");
-	cub->text[4].name = ft_strdup("./textures/empty.xpm");
+	cub->text[4].name = ft_strdup("./textures/empty_new.xpm");
 	cub->text[5].name = ft_strdup("./textures/player_reverse.xpm");
 	cub->text[6].name = ft_strdup("./textures/evil.xpm");
 	cub->text[7].name = ft_strdup("./textures/evil-_1_.xpm");

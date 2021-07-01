@@ -1,65 +1,91 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_bonus.c                                     :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 02:37:21 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/17 19:10:22 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/01 17:41:22 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/solong.h"
 
-void	put_image(t_cub *cub, int j, int i, char *texture)
+void	render_valid_pixel(t_cub *cub, int text_id)
 {
-	cub->img_d = mlx_xpm_file_to_image(cub->win.mlx_p, texture,
-			&cub->image_width, &cub->image_height);
-	mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p,
-		cub->img_d, j * (cub->win.wid / cub->data.cols),
-		i * (cub->win.hei / cub->data.rows));
-	mlx_destroy_image(cub->win.mlx_p, cub->img_d);
+	int	color;
+	int	background;
+
+	color = grep_color(cub->text[text_id], cub->data.text.x, cub->data.text.y);
+	background = grep_color(cub->text[text_id], 0, 0);
+	if (color != background)
+		my_mlx_pixel_put(&cub->win, cub->data.pos_x + cub->data.screen.x,
+			cub->data.screen.y, color);
 }
 
-void	render_sprites(t_cub *cub, int j, int i)
+void	render_texture(t_cub *cub, int j, int i, int text_id)
+{
+	int	size;
+
+	fill_ratio_data(cub, i, j);
+	while (cub->data.pos_x + cub->data.screen.x < 0)
+		cub->data.screen.x++;
+	while (++cub->data.screen.x <= cub->data.right_px)
+	{
+		cub->data.text.x = cub->data.screen.x
+			* (cub->text[text_id].wid / cub->data.sprt_wid);
+		cub->data.screen.y = cub->data.top_px - 1;
+		size = -1;
+		while (++cub->data.screen.y < cub->data.bot_px)
+		{
+			++size;
+			cub->data.text.y = (size
+					* (cub->text[text_id].hei / cub->data.sprt_hei));
+			if (cub->data.text.y < 0)
+				cub->data.text.y = 0;
+			render_valid_pixel(cub, text_id);
+		}
+	}
+}
+
+void	select_texture_to_render(t_cub *cub, int j, int i)
 {
 	if (cub->grid[i][j] == '1')
-		put_image(cub, j, i, cub->text[3].name);
+		render_texture(cub, j, i, 3);
 	else if (cub->grid[i][j] == 'E')
-		put_image(cub, j, i, cub->text[2].name);
+		render_texture(cub, j, i, 2);
 	else if (cub->grid[i][j] == 'C')
-		put_image(cub, j, i, cub->text[1].name);
+		render_texture(cub, j, i, 1);
 	else if (cub->grid[i][j] == '0')
-		put_image(cub, j, i, cub->text[4].name);
+		render_texture(cub, j, i, 4);
 	else if (cub->grid[i][j] == 'P')
-		put_image(cub, cub->player.pos.x, cub->player.pos.y, cub->player_text);
+		render_texture(cub, cub->player.pos.x, cub->player.pos.y,
+			cub->player_text_id);
 }
 
 void	select_active_texture(t_cub *cub)
 {
 	if (cub->player.orientation == 0)
-		cub->player_text = cub->text[0].name;
+		cub->player_text_id = 0;
 	else
-		cub->player_text = cub->text[5].name;
+		cub->player_text_id = 5;
 }
 
-int	render_lol(t_cub *cub)
+int	render(t_cub *cub)
 {
 	int		i;
 	int		j;
 
-	i = 0;
+	i = -1;
 	select_active_texture(cub);
-	while (i < cub->data.rows)
+	while (++i < cub->data.rows)
 	{
-		j = 0;
-		while (j < cub->data.cols)
-		{
-			render_sprites(cub, j, i);
-			j++;
-		}
-		i++;
+		j = -1;
+		while (++j < cub->data.cols)
+			select_texture_to_render(cub, j, i);
 	}
+	mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p,
+		cub->win.img.img, 0, 0);
 	return (1);
 }

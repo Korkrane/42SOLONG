@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_events_bonus.c                                 :+:      :+:    :+:   */
+/*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:04:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/16 16:09:37 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/01 17:44:10 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	key_pressed(int key, t_cub *cub)
 	else if (key == KEY_ESC)
 		end_cub(cub);
 	update(cub, &cub->player);
-	render_lol(cub);
+	render(cub);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:27:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/17 19:26:06 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/01 17:43:51 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@
 # define KEY_ESC	65307
 
 # define WHITE	0x00FFFFFF
+# define BLUE	0x000000FF
+
+typedef struct s_coord
+{
+	float		x;
+	float		y;
+}				t_coord;
 
 typedef struct s_pos
 {
@@ -99,6 +106,14 @@ typedef struct s_data
 	int				res;
 	int				collect_number;
 	int				exit_number;
+	float			top_px;
+	float			bot_px;
+	float			sprt_hei;
+	float			sprt_wid;
+	float			pos_x;
+	float			right_px;
+	t_coord			text;
+	t_coord			screen;
 }				t_data;
 
 typedef struct s_cub
@@ -114,7 +129,7 @@ typedef struct s_cub
 	void		*win_d;
 	int			image_width;
 	int			image_height;
-	char		*player_text;
+	int			player_text_id;
 }				t_cub;
 
 int				key_pressed(int key, t_cub *cub);
@@ -164,6 +179,8 @@ void			init_cub(t_cub *cub, char *map);
 void			load_cub(t_cub *cub, char *map);
 void			run_cub(t_cub *cub);
 int				end_cub(t_cub *cub);
-int				render_lol(t_cub *cub);
+int				render(t_cub *cub);
 void			set_old_position(t_cub *cub, t_player *player);
+int				grep_color(t_text text, int x, int y);
+void			fill_ratio_data(t_cub *cub, int i, int j);
 #endif
