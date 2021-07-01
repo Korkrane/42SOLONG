@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 23:50:20 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/23 12:35:12 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/01 16:23:19 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	init_cub(t_cub *cub, char *map)
 	cub->data.exit_number = 0;
 	cub->total_action = 0;
 	cub->data.collect_number = 0;
-	cub->ennemy_text = NULL;
-	cub->player_text = NULL;
 	load_cub(cub, map);
 }
 
@@ -89,7 +87,7 @@ void	run_cub(t_cub *cub)
 	load_win(&cub->win);
 	mlx_hook(cub->win.win_p, 3, 1L << 1, key_released, &cub->player);
 	mlx_hook(cub->win.win_p, 2, 1L << 0, key_pressed, cub);
-	mlx_loop_hook(cub->win.mlx_p, render_lol, cub);
+	mlx_loop_hook(cub->win.mlx_p, render, cub);
 	mlx_hook(cub->win.win_p, 33, 1L << 17, &end_cub, cub);
 	mlx_loop(cub->win.mlx_p);
 }

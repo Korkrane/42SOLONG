@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:27:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/30 19:17:46 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/01 16:27:56 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@
 
 # define WHITE	0x00FFFFFF
 # define BLUE	0x000000FF
+
+typedef struct s_coord
+{
+	float		x;
+	float		y;
+}				t_coord;
 
 typedef struct s_pos
 {
@@ -100,23 +106,15 @@ typedef struct s_data
 	int				res;
 	int				collect_number;
 	int				exit_number;
+	float			top_px;
+	float			bot_px;
+	float sprt_hei;
+	float sprt_wid;
+	float pos_x;
+	float right_px;
+	t_coord text;
+	t_coord screen;
 }				t_data;
-
-/*
-typedef struct s_sprt
-{
-	int			visibility;
-	int			texture;
-	int			top_px;
-	int			bot_px;
-	float		dist;
-	t_pos		pos;
-	float		ang;
-	float		hei;
-	int			id;
-	float		pos_x;
-}				t_sprt;
-*/
 
 typedef struct s_cub
 {
@@ -130,12 +128,10 @@ typedef struct s_cub
 	int			total_action;
 	int			ennemy_limit_move;
 	int			ennemy_limit_index;
-//	void		*img_d;
-//	void		*win_d;
 	int			image_width;
 	int			image_height;
-	char		*player_text;
-	char		*ennemy_text;
+	int			ennemy_text_id;
+	int			player_text_id;
 }				t_cub;
 
 int				key_pressed(int key, t_cub *cub);
@@ -185,7 +181,8 @@ void			init_cub(t_cub *cub, char *map);
 void			load_cub(t_cub *cub, char *map);
 void			run_cub(t_cub *cub);
 int				end_cub(t_cub *cub);
-int				render_lol(t_cub *cub);
+int				render(t_cub *cub);
 int				check_ennemy(t_cub *cub);
 void			set_old_position(t_cub *cub, t_player *player);
+int				grep_color(t_text text, int x, int y);
 #endif
