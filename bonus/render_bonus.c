@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 02:37:21 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/01 16:27:24 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/01 17:21:41 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,43 @@
 
 void	render_valid_pixel(t_cub *cub, int text_id)
 {
+	int	color;
+	int	background;
 
-	int		color;
-	int		background;
 	color = grep_color(cub->text[text_id], cub->data.text.x, cub->data.text.y);
 	background = grep_color(cub->text[text_id], 0, 0);
 	if (color != background)
 		my_mlx_pixel_put(&cub->win, cub->data.pos_x + cub->data.screen.x,
-				cub->data.screen.y, color);
+			cub->data.screen.y, color);
 }
 
 void	render_texture(t_cub *cub, int j, int i, int text_id)
 {
-	int size;
+	int	size;
 
-	cub->data.sprt_hei = cub->win.hei / cub->data.rows;
-	cub->data.sprt_wid = cub->win.wid / cub->data.cols;
-	cub->data.top_px = i * cub->data.sprt_hei;
-	cub->data.bot_px = (i + 1) * cub->data.sprt_hei;
-	cub->data.right_px = cub->data.sprt_wid;
-	cub->data.pos_x = j * (cub->win.wid / cub->data.cols);
-	cub->data.screen.x = -1;
-	while(cub->data.pos_x + cub->data.screen.x < 0)
+	fill_ratio_data(cub, i, j);
+	while (cub->data.pos_x + cub->data.screen.x < 0)
 		cub->data.screen.x++;
 	while (++cub->data.screen.x <= cub->data.right_px)
 	{
-		cub->data.text.x = cub->data.screen.x *
-			(cub->text[text_id].wid / cub->data.sprt_wid);
+		cub->data.text.x = cub->data.screen.x
+			* (cub->text[text_id].wid / cub->data.sprt_wid);
 		cub->data.screen.y = cub->data.top_px - 1;
 		size = -1;
-		while(++cub->data.screen.y < cub->data.bot_px)
+		while (++cub->data.screen.y < cub->data.bot_px)
 		{
 			++size;
-			cub->data.text.y = (size *
-					(cub->text[text_id].hei / cub->data.sprt_hei));
+			cub->data.text.y = (size
+					* (cub->text[text_id].hei / cub->data.sprt_hei));
 			if (cub->data.text.y < 0)
 				cub->data.text.y = 0;
-			render_valid_pixel(cub, text_id);	
+			render_valid_pixel(cub, text_id);
 		}
 	}
 }
 
 void	select_texture_to_render(t_cub *cub, int j, int i)
 {
-
 	if (cub->grid[i][j] == '1')
 		render_texture(cub, j, i, 3);
 	else if (cub->grid[i][j] == 'E')
@@ -70,7 +63,7 @@ void	select_texture_to_render(t_cub *cub, int j, int i)
 		render_texture(cub, j, i, cub->ennemy_text_id);
 	else if (cub->grid[i][j] == 'P')
 		render_texture(cub, cub->player.pos.x, cub->player.pos.y,
-				cub->player_text_id);
+			cub->player_text_id);
 }
 
 void	select_active_texture(t_cub *cub)
@@ -99,11 +92,11 @@ int	render(t_cub *cub)
 		while (++j < cub->data.cols)
 			select_texture_to_render(cub, j, i);
 	}
-	mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p, cub->win.img.img, 0, 0);
+	mlx_put_image_to_window(cub->win.mlx_p, cub->win.win_p,
+		cub->win.img.img, 0, 0);
 	action = ft_itoa(cub->total_action);
 	mlx_string_put(cub->win.mlx_p, cub->win.win_p, 50, 50,
-			WHITE, action);
+		WHITE, action);
 	free(action);
-
 	return (1);
 }

@@ -6,15 +6,26 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 22:22:51 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/01 16:26:11 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/01 17:21:36 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/solong_bonus.h"
 
-int		grep_color(t_text text, int x, int y)
+void	fill_ratio_data(t_cub *cub, int i, int j)
 {
-	char *dst;
+	cub->data.sprt_hei = cub->win.hei / cub->data.rows;
+	cub->data.sprt_wid = cub->win.wid / cub->data.cols;
+	cub->data.top_px = i * cub->data.sprt_hei;
+	cub->data.bot_px = (i + 1) * cub->data.sprt_hei;
+	cub->data.right_px = cub->data.sprt_wid;
+	cub->data.pos_x = j * (cub->win.wid / cub->data.cols);
+	cub->data.screen.x = -1;
+}
+
+int	grep_color(t_text text, int x, int y)
+{
+	char	*dst;
 
 	if (x < 0)
 		x = 0;
@@ -25,7 +36,7 @@ int		grep_color(t_text text, int x, int y)
 	if (y > text.hei)
 		y = text.hei;
 	dst = text.data + (y * text.line_length + x * text.bits_per_pixel / 8);
-	return (*(unsigned int*)dst);
+	return (*(unsigned int *)dst);
 }
 
 /*

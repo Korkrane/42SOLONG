@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:27:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/01 16:27:56 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/01 17:23:41 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,12 @@ typedef struct s_data
 	int				exit_number;
 	float			top_px;
 	float			bot_px;
-	float sprt_hei;
-	float sprt_wid;
-	float pos_x;
-	float right_px;
-	t_coord text;
-	t_coord screen;
+	float			sprt_hei;
+	float			sprt_wid;
+	float			pos_x;
+	float			right_px;
+	t_coord			text;
+	t_coord			screen;
 }				t_data;
 
 typedef struct s_cub
@@ -185,4 +185,5 @@ int				render(t_cub *cub);
 int				check_ennemy(t_cub *cub);
 void			set_old_position(t_cub *cub, t_player *player);
 int				grep_color(t_text text, int x, int y);
+void			fill_ratio_data(t_cub *cub, int i, int j);
 #endif
