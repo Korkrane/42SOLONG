@@ -17,11 +17,11 @@
 ** to have it in the good order.
 */
 
-int	fill_list_grid(t_cub *cub, char *line, t_list **list)
+int	fill_list_grid(t_sl *sl, char *line, t_list **list)
 {
 	t_list	*new_elem;
 
-	cub->data.grid_flag = 1;
+	sl->data.grid_flag = 1;
 	new_elem = ft_lstnew(ft_strdup(line));
 	ft_lstadd_back(list, new_elem);
 	return (1);
@@ -29,26 +29,26 @@ int	fill_list_grid(t_cub *cub, char *line, t_list **list)
 
 /*
 ** Help us to determine the content of the line then save the data to our
-** cub3d parameter. grid_flag is here to know when we reached map parameter.
+** sl3d parameter. grid_flag is here to know when we reached map parameter.
 */
 
-int	line_data(t_cub *cub, char *line, t_list **list)
+int	line_data(t_sl *sl, char *line, t_list **list)
 {
-	cub->data.res = fill_list_grid(cub, line, list);
-	return (cub->data.res);
+	sl->data.res = fill_list_grid(sl, line, list);
+	return (sl->data.res);
 }
 
-int	valid_map_format(t_cub *cub)
+int	valid_map_format(t_sl *sl)
 {
 	int	i;
 	int	line_len;
 
 	i = 0;
-	line_len = ft_strlen(cub->grid[i]);
-	while (i < cub->data.rows)
+	line_len = ft_strlen(sl->grid[i]);
+	while (i < sl->data.rows)
 	{
-		line_len = ft_strlen(cub->grid[i]);
-		if (line_len != cub->data.cols)
+		line_len = ft_strlen(sl->grid[i]);
+		if (line_len != sl->data.cols)
 			return (0);
 		i++;
 	}
@@ -59,22 +59,22 @@ int	valid_map_format(t_cub *cub)
 ** Check if we have all the required parameters to load the game.
 */
 
-int	check_missing(t_cub *cub)
+int	check_missing(t_sl *sl)
 {
-	if (!cub->data.exit_number)
+	if (!sl->data.exit_number)
 		return (is_error("There is 0 exit"));
-	if (!cub->data.collect_number)
+	if (!sl->data.collect_number)
 		return (is_error("There is 0 collectible"));
-	if (!valid_map_format(cub))
+	if (!valid_map_format(sl))
 		return (is_error("Map hasn't a valid format"));
 	return (1);
 }
 
 /*
-** Read the .cub file and analyse it line by line.
+** Read the .sl file and analyse it line by line.
 */
 
-int	parsing(t_cub *cub, char *map_file, t_list **list)
+int	parsing(t_sl *sl, char *map_file, t_list **list)
 {
 	int		fd;
 	int		valid;
@@ -91,7 +91,7 @@ int	parsing(t_cub *cub, char *map_file, t_list **list)
 	{
 		i = get_next_line(fd, &line);
 		if (i != 0)
-			valid = line_data(cub, line, list);
+			valid = line_data(sl, line, list);
 		free(line);
 		if (valid == 0)
 			return (0);

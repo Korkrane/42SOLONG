@@ -37,12 +37,12 @@ int	check_surrounding(char **grid, int x, int y)
 	return (1);
 }
 
-void	count_exit_and_collect(t_cub *cub, char c)
+void	count_exit_and_collect(t_sl *sl, char c)
 {
 	if (ft_strchr("E", c))
-		cub->data.exit_number++;
+		sl->data.exit_number++;
 	if (ft_strchr("C", c))
-		cub->data.collect_number++;
+		sl->data.collect_number++;
 }
 
 /*
@@ -51,7 +51,7 @@ void	count_exit_and_collect(t_cub *cub, char c)
 ** Then we check if the char isn't something else than a valid map char.
 */
 
-int	is_grid(t_cub *cub, int rows, int y, int len)
+int	is_grid(t_sl *sl, int rows, int y, int len)
 {
 	int		x;
 	int		next_row;
@@ -59,21 +59,21 @@ int	is_grid(t_cub *cub, int rows, int y, int len)
 
 	x = -1;
 	if (y > 0)
-		prev_row = ft_strlen(cub->grid[y - 1]);
+		prev_row = ft_strlen(sl->grid[y - 1]);
 	if (y + 1 != rows)
-		next_row = ft_strlen(cub->grid[y + 1]);
+		next_row = ft_strlen(sl->grid[y + 1]);
 	else
 		next_row = 0;
-	while (cub->grid[y][++x])
+	while (sl->grid[y][++x])
 	{
-		if ((ft_strchr("0ECPX", cub->grid[y][x]) != NULL) && (y == 0 || x == 0
+		if ((ft_strchr("0ECPX", sl->grid[y][x]) != NULL) && (y == 0 || x == 0
 			|| y == (rows - 1) || x == (len - 1)
 			|| x - 1 > prev_row || x + 1 > next_row
-			|| !check_surrounding(cub->grid, x, y)))
+			|| !check_surrounding(sl->grid, x, y)))
 			return (is_error("Map is not fully closed"));
-		if (!ft_strchr("01CEPX", cub->grid[y][x]))
+		if (!ft_strchr("01CEPX", sl->grid[y][x]))
 			return (is_error("Invalid char in map"));
-		count_exit_and_collect(cub, cub->grid[y][x]);
+		count_exit_and_collect(sl, sl->grid[y][x]);
 	}
 	return (1);
 }
@@ -82,16 +82,16 @@ int	is_grid(t_cub *cub, int rows, int y, int len)
 ** Check the validity of each rows in the map & if there isn't empty columns.
 */
 
-int	check_grid(t_cub *cub)
+int	check_grid(t_sl *sl)
 {
 	int		y;
 	int		len;
 
 	y = -1;
-	while (++y < cub->data.rows)
+	while (++y < sl->data.rows)
 	{
-		len = ft_strlen(cub->grid[y]);
-		if (!is_grid(cub, cub->data.rows, y, len))
+		len = ft_strlen(sl->grid[y]);
+		if (!is_grid(sl, sl->data.rows, y, len))
 			return (0);
 	}
 	return (1);

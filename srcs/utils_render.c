@@ -12,15 +12,15 @@
 
 #include "../includes/solong.h"
 
-void	fill_ratio_data(t_cub *cub, int i, int j)
+void	fill_ratio_data(t_sl *sl, int i, int j)
 {
-	cub->data.sprt_hei = cub->win.hei / cub->data.rows;
-	cub->data.sprt_wid = cub->win.wid / cub->data.cols;
-	cub->data.top_px = i * cub->data.sprt_hei;
-	cub->data.bot_px = (i + 1) * cub->data.sprt_hei;
-	cub->data.right_px = cub->data.sprt_wid;
-	cub->data.pos_x = j * (cub->win.wid / cub->data.cols);
-	cub->data.screen.x = -1;
+	sl->data.sprt_hei = sl->win.hei / sl->data.rows;
+	sl->data.sprt_wid = sl->win.wid / sl->data.cols;
+	sl->data.top_px = i * sl->data.sprt_hei;
+	sl->data.bot_px = (i + 1) * sl->data.sprt_hei;
+	sl->data.right_px = sl->data.sprt_wid;
+	sl->data.pos_x = j * (sl->win.wid / sl->data.cols);
+	sl->data.screen.x = -1;
 }
 
 int	grep_color(t_text text, int x, int y)

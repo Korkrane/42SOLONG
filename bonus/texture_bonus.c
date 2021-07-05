@@ -12,76 +12,76 @@
 
 #include "../includes/solong_bonus.h"
 
-void	init_texture(t_cub *cub)
+void	init_texture(t_sl *sl)
 {
 	int	i;
 
 	i = 0;
 	while (i < 8)
 	{
-		cub->text[i].ptr = NULL;
-		cub->text[i].data = NULL;
-		cub->text[i].name = NULL;
-		cub->text[i].bits_per_pixel = 0;
-		cub->text[i].line_length = 0;
-		cub->text[i].endian = 0;
-		cub->text[i].wid = 0;
-		cub->text[i].hei = 0;
+		sl->text[i].ptr = NULL;
+		sl->text[i].data = NULL;
+		sl->text[i].name = NULL;
+		sl->text[i].bits_per_pixel = 0;
+		sl->text[i].line_length = 0;
+		sl->text[i].endian = 0;
+		sl->text[i].wid = 0;
+		sl->text[i].hei = 0;
 		i++;
 	}
 }
 
-void	free_texture(t_cub *cub)
+void	free_texture(t_sl *sl)
 {
 	int	i;
 
 	i = -1;
 	while (++i < 8)
 	{
-		if (cub->text[i].name)
+		if (sl->text[i].name)
 		{
-			free(cub->text[i].name);
-			cub->text[i].name = NULL;
+			free(sl->text[i].name);
+			sl->text[i].name = NULL;
 		}
-		if (cub->text[i].ptr)
+		if (sl->text[i].ptr)
 		{
-			mlx_destroy_image(cub->win.mlx_p, cub->text[i].ptr);
-			cub->text[i].ptr = NULL;
-			cub->text[i].data = NULL;
+			mlx_destroy_image(sl->win.mlx_p, sl->text[i].ptr);
+			sl->text[i].ptr = NULL;
+			sl->text[i].data = NULL;
 		}
 	}
 }
 
-int	new_fill_texture(t_cub *cub)
+int	new_fill_texture(t_sl *sl)
 {
-	cub->text[0].name = ft_strdup("./textures/player.xpm");
-	cub->text[1].name = ft_strdup("./textures/collect.xpm");
-	cub->text[2].name = ft_strdup("./textures/Nouveau-projet-_1_.xpm");
-	cub->text[3].name = ft_strdup("./textures/pillar.xpm");
-	cub->text[4].name = ft_strdup("./textures/empty_new.xpm");
-	cub->text[5].name = ft_strdup("./textures/player_reverse.xpm");
-	cub->text[6].name = ft_strdup("./textures/evil.xpm");
-	cub->text[7].name = ft_strdup("./textures/evil-_1_.xpm");
+	sl->text[0].name = ft_strdup("./textures/player.xpm");
+	sl->text[1].name = ft_strdup("./textures/collect.xpm");
+	sl->text[2].name = ft_strdup("./textures/Nouveau-projet-_1_.xpm");
+	sl->text[3].name = ft_strdup("./textures/pillar.xpm");
+	sl->text[4].name = ft_strdup("./textures/empty_new.xpm");
+	sl->text[5].name = ft_strdup("./textures/player_reverse.xpm");
+	sl->text[6].name = ft_strdup("./textures/evil.xpm");
+	sl->text[7].name = ft_strdup("./textures/evil-_1_.xpm");
 	return (1);
 }
 
-int	load_texture(t_cub *cub)
+int	load_texture(t_sl *sl)
 {
 	int	i;
 
 	i = -1;
-	new_fill_texture(cub);
+	new_fill_texture(sl);
 	while (++i < 8)
 	{
-		if (cub->text[i].name)
+		if (sl->text[i].name)
 		{
-			cub->text[i].ptr = mlx_xpm_file_to_image(cub->win.mlx_p,
-					cub->text[i].name, &cub->text[i].wid, &cub->text[i].hei);
-			if (!cub->text[i].ptr)
+			sl->text[i].ptr = mlx_xpm_file_to_image(sl->win.mlx_p,
+					sl->text[i].name, &sl->text[i].wid, &sl->text[i].hei);
+			if (!sl->text[i].ptr)
 				return (is_error("Bad texture content"));
-			cub->text[i].data = mlx_get_data_addr(cub->text[i].ptr,
-					&cub->text[i].bits_per_pixel, &cub->text[i].line_length,
-					&cub->text[i].endian);
+			sl->text[i].data = mlx_get_data_addr(sl->text[i].ptr,
+					&sl->text[i].bits_per_pixel, &sl->text[i].line_length,
+					&sl->text[i].endian);
 		}
 	}
 	return (1);

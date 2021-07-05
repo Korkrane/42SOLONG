@@ -12,38 +12,38 @@
 
 #include "../includes/solong.h"
 
-void	init_grid(t_cub *cub)
+void	init_grid(t_sl *sl)
 {
-	cub->data.rows = 0;
-	cub->data.cols = 0;
-	cub->data.grid_flag = 0;
+	sl->data.rows = 0;
+	sl->data.cols = 0;
+	sl->data.grid_flag = 0;
 }
 
-void	free_grid(t_cub *cub)
+void	free_grid(t_sl *sl)
 {
 	int	i;
 
 	i = -1;
-	while (++i < cub->data.rows)
+	while (++i < sl->data.rows)
 	{
-		free(cub->grid[i]);
-		cub->grid[i] = NULL;
+		free(sl->grid[i]);
+		sl->grid[i] = NULL;
 	}
-	free(cub->grid);
+	free(sl->grid);
 }
 
 /*
-** Duplicate the content of my list in my cub structure.
+** Duplicate the content of my list in my sl structure.
 */
 
-int	fill_grid(t_cub *cub, t_list *list)
+int	fill_grid(t_sl *sl, t_list *list)
 {
 	int	i;
 
 	i = 0;
 	while (list)
 	{
-		cub->grid[i] = ft_strdup(list->content);
+		sl->grid[i] = ft_strdup(list->content);
 		i++;
 		list = list->next;
 	}
@@ -52,10 +52,10 @@ int	fill_grid(t_cub *cub, t_list *list)
 
 /*
 ** Find number of rows and cols of the map. Malloc the required space to save
-** the map parameter then fill it in my cub structure.
+** the map parameter then fill it in my sl structure.
 */
 
-int	grid_alloc(t_cub *cub, t_list *list)
+int	grid_alloc(t_sl *sl, t_list *list)
 {
 	int	cols;
 	int	rows;
@@ -64,12 +64,12 @@ int	grid_alloc(t_cub *cub, t_list *list)
 	rows = ft_lstsize(list);
 	if (!cols || !rows)
 		return (is_error("Map has 0 cols or 0 rows"));
-	cub->grid = malloc(sizeof(char *) * rows + 1);
-	cub->data.cols = cols;
-	cub->data.rows = rows;
-	if (!cub->grid)
+	sl->grid = malloc(sizeof(char *) * rows + 1);
+	sl->data.cols = cols;
+	sl->data.rows = rows;
+	if (!sl->grid)
 		return (is_error("Not enough memory to malloc the map"));
-	fill_grid(cub, list);
+	fill_grid(sl, list);
 	return (1);
 }
 
@@ -77,15 +77,15 @@ int	grid_alloc(t_cub *cub, t_list *list)
 ** Malloc and fill my map. Then check if it's a valid map.
 */
 
-int	grid_parsing(t_cub *cub, t_list *list)
+int	grid_parsing(t_sl *sl, t_list *list)
 {
-	if (!grid_alloc(cub, list))
+	if (!grid_alloc(sl, list))
 	{
 		ft_lstclear(&list, &ft_free);
 		return (0);
 	}
 	ft_lstclear(&list, &ft_free);
-	if (!check_player(cub) || !check_grid(cub))
+	if (!check_player(sl) || !check_grid(sl))
 		return (0);
 	return (1);
 }

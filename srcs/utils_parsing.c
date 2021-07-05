@@ -84,7 +84,7 @@ int	free_split(char ***split, int ret)
 ** Check if map file has the correct extension.
 */
 
-int	cub_ext(char *map_file)
+int	sl_ext(char *map_file)
 {
 	int	i;
 

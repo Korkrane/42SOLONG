@@ -23,11 +23,11 @@ void	init_img(t_img *img)
 	img->hei = 800;
 }
 
-void	free_img(t_cub *cub)
+void	free_img(t_sl *sl)
 {
-	mlx_destroy_image(cub->win.mlx_p, cub->win.img.img);
-	cub->win.img.img = NULL;
-	cub->win.img.addr = NULL;
+	mlx_destroy_image(sl->win.mlx_p, sl->win.img.img);
+	sl->win.img.img = NULL;
+	sl->win.img.addr = NULL;
 }
 
 void	load_img(t_win *win)

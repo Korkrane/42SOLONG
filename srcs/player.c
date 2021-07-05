@@ -21,39 +21,39 @@ void	init_player(t_player *player)
 	player->orientation = 0;
 }
 
-void	valid_move(t_cub *cub, int new_x, int new_y, t_player *player)
+void	valid_move(t_sl *sl, int new_x, int new_y, t_player *player)
 {
-	if (cub->grid[new_y][new_x] == 'C')
-		cub->data.collect_number--;
-	if (cub->grid[new_y][new_x] == 'E' && cub->data.collect_number == 0)
+	if (sl->grid[new_y][new_x] == 'C')
+		sl->data.collect_number--;
+	if (sl->grid[new_y][new_x] == 'E' && sl->data.collect_number == 0)
 	{
 		printf("\nEND: You left in another dimension\n");
-		end_cub(cub);
+		end_sl(sl);
 	}
-	else if (cub->grid[new_y][new_x] == 'E' && cub->data.collect_number > 0)
+	else if (sl->grid[new_y][new_x] == 'E' && sl->data.collect_number > 0)
 		printf("Bro... don't leave without all the food...\n");
 	else
 	{
-		cub->total_action++;
-		cub->grid[player->pos.y][player->pos.x] = '0';
-		cub->grid[new_y][new_x] = 'P';
-		cub->player.pos.x = new_x;
-		cub->player.pos.y = new_y;
+		sl->total_action++;
+		sl->grid[player->pos.y][player->pos.x] = '0';
+		sl->grid[new_y][new_x] = 'P';
+		sl->player.pos.x = new_x;
+		sl->player.pos.y = new_y;
 	}
 }
 
-void	update(t_cub *cub, t_player *player)
+void	update(t_sl *sl, t_player *player)
 {
 	int	new_x;
 	int	new_y;
 
-	set_old_position(cub, player);
+	set_old_position(sl, player);
 	new_x = player->pos.x + player->lateral_d;
 	new_y = player->pos.y - player->walk_d;
-	if (!grid_is_wall(new_x, new_y, cub))
+	if (!grid_is_wall(new_x, new_y, sl))
 	{
-		valid_move(cub, new_x, new_y, player);
-		printf("Moves: %d\n", cub->total_action);
+		valid_move(sl, new_x, new_y, player);
+		printf("Moves: %d\n", sl->total_action);
 	}
 }
 
@@ -66,7 +66,7 @@ void	pos_player(t_player *player, int x, int y)
 	}
 }
 
-int	check_player(t_cub *cub)
+int	check_player(t_sl *sl)
 {
 	int	x;
 	int	y;
@@ -74,14 +74,14 @@ int	check_player(t_cub *cub)
 
 	y = -1;
 	num_position = 0;
-	while (++y < cub->data.rows)
+	while (++y < sl->data.rows)
 	{
 		x = -1;
-		while (cub->grid[y][++x])
+		while (sl->grid[y][++x])
 		{
-			if (ft_strchr("P", cub->grid[y][x]))
+			if (ft_strchr("P", sl->grid[y][x]))
 			{
-				pos_player(&cub->player, x, y);
+				pos_player(&sl->player, x, y);
 				num_position++;
 				if (num_position > 1)
 					return (is_error("Multiple player position in map"));

@@ -12,26 +12,26 @@
 
 #include "../includes/solong.h"
 
-int	key_pressed(int key, t_cub *cub)
+int	key_pressed(int key, t_sl *sl)
 {
 	if (key == KEY_Z || key == KEY_UP || key == KEY_W)
-		cub->player.walk_d = 1;
+		sl->player.walk_d = 1;
 	else if (key == KEY_S || key == KEY_DOWN)
-		cub->player.walk_d = -1;
+		sl->player.walk_d = -1;
 	else if (key == KEY_Q || key == KEY_A || key == KEY_LEFT)
 	{
-		cub->player.orientation = 1;
-		cub->player.lateral_d = -1;
+		sl->player.orientation = 1;
+		sl->player.lateral_d = -1;
 	}
 	else if (key == KEY_D || key == KEY_RIGHT)
 	{
-		cub->player.orientation = 0;
-		cub->player.lateral_d = 1;
+		sl->player.orientation = 0;
+		sl->player.lateral_d = 1;
 	}
 	else if (key == KEY_ESC)
-		end_cub(cub);
-	update(cub, &cub->player);
-	render(cub);
+		end_sl(sl);
+	update(sl, &sl->player);
+	render(sl);
 	return (0);
 }
 

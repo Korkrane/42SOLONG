@@ -16,33 +16,33 @@
 ** Init all of our ressources and then start the game.
 */
 
-void	init_cub(t_cub *cub, char *map)
+void	init_sl(t_sl *sl, char *map)
 {
-	init_win(&cub->win);
-	init_img(&cub->win.img);
-	init_grid(cub);
-	init_player(&cub->player);
-	init_texture(cub);
-	cub->mlx_load = 0;
-	cub->data.txtr_err = 0;
-	cub->data.exit_number = 0;
-	cub->total_action = 0;
-	cub->data.collect_number = 0;
-	load_cub(cub, map);
+	init_win(&sl->win);
+	init_img(&sl->win.img);
+	init_grid(sl);
+	init_player(&sl->player);
+	init_texture(sl);
+	sl->mlx_load = 0;
+	sl->data.txtr_err = 0;
+	sl->data.exit_number = 0;
+	sl->total_action = 0;
+	sl->data.collect_number = 0;
+	load_sl(sl, map);
 }
 
 /*
 ** Free all of our ressources.
 */
 
-int	end_cub(t_cub *cub)
+int	end_sl(t_sl *sl)
 {
-	free_texture(cub);
-	if (cub->data.rows)
-		free_grid(cub);
-	if (cub->win.img.img)
-		free_img(cub);
-	free_win(cub);
+	free_texture(sl);
+	if (sl->data.rows)
+		free_grid(sl);
+	if (sl->win.img.img)
+		free_img(sl);
+	free_win(sl);
 	exit(0);
 }
 
@@ -50,26 +50,26 @@ int	end_cub(t_cub *cub)
 ** If we have a valid map, load the game.
 */
 
-void	load_cub(t_cub *cub, char *map)
+void	load_sl(t_sl *sl, char *map)
 {
 	t_list	*list;
 
 	list = NULL;
-	cub->win.mlx_p = mlx_init();
-	if (parsing(cub, map, &list))
+	sl->win.mlx_p = mlx_init();
+	if (parsing(sl, map, &list))
 	{
-		if (!grid_parsing(cub, list) || !check_missing(cub)
-			|| !load_texture(cub))
-			end_cub(cub);
-		cub->player.old_pos.x = cub->player.pos.x;
-		cub->player.old_pos.y = cub->player.pos.y;
+		if (!grid_parsing(sl, list) || !check_missing(sl)
+			|| !load_texture(sl))
+			end_sl(sl);
+		sl->player.old_pos.x = sl->player.pos.x;
+		sl->player.old_pos.y = sl->player.pos.y;
 		printf("You enter in a new dimension, take food before leaving.\n\n");
-		run_cub(cub);
+		run_sl(sl);
 	}
 	else
 	{
 		ft_lstclear(&list, &ft_free);
-		end_cub(cub);
+		end_sl(sl);
 	}
 }
 
@@ -77,25 +77,25 @@ void	load_cub(t_cub *cub, char *map)
 ** If save arg true, then just copy the 1st image. Otherwise, loop the render.
 */
 
-void	run_cub(t_cub *cub)
+void	run_sl(t_sl *sl)
 {
-	load_img(&cub->win);
-	load_win(&cub->win);
-	mlx_hook(cub->win.win_p, 3, 1L << 1, key_released, &cub->player);
-	mlx_hook(cub->win.win_p, 2, 1L << 0, key_pressed, cub);
-	mlx_loop_hook(cub->win.mlx_p, render, cub);
-	mlx_hook(cub->win.win_p, 33, 1L << 17, &end_cub, cub);
-	mlx_loop(cub->win.mlx_p);
+	load_img(&sl->win);
+	load_win(&sl->win);
+	mlx_hook(sl->win.win_p, 3, 1L << 1, key_released, &sl->player);
+	mlx_hook(sl->win.win_p, 2, 1L << 0, key_pressed, sl);
+	mlx_loop_hook(sl->win.mlx_p, render, sl);
+	mlx_hook(sl->win.win_p, 33, 1L << 17, &end_sl, sl);
+	mlx_loop(sl->win.mlx_p);
 }
 
 int	main(int ac, char **av)
 {
-	t_cub	cub;
+	t_sl	sl;
 
 	if (ac == 2)
 	{
-		if (cub_ext(av[1]))
-			init_cub(&cub, av[1]);
+		if (sl_ext(av[1]))
+			init_sl(&sl, av[1]);
 		return (0);
 	}
 	else
