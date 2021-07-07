@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 23:50:20 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/01 16:23:19 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 19:19:59 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	load_sl(t_sl *sl, char *map)
 		sl->player.old_pos.x = sl->player.pos.x;
 		sl->player.old_pos.y = sl->player.pos.y;
 		printf("You enter in a new dimension, take all the food before");
-		printf("the Weird Wizard finds you and escape !\n");
+		printf(" the Weird Wizard finds you and escape !\n");
 		run_sl(sl);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 02:37:21 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/01 17:21:41 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 19:56:46 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	render_valid_pixel(t_sl *sl, int text_id)
 	int	color;
 	int	background;
 
+	if (text_id == 0 || text_id == 5)
+		render_valid_pixel(sl, 4);
 	color = grep_color(sl->text[text_id], sl->data.text.x, sl->data.text.y);
 	background = grep_color(sl->text[text_id], 0, 0);
 	if (color != background)

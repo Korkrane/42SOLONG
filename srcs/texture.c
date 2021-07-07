@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:21:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/01 17:46:21 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 19:28:55 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ int	new_fill_texture(t_sl *sl)
 {
 	sl->text[0].name = ft_strdup("./textures/player.xpm");
 	sl->text[1].name = ft_strdup("./textures/collect.xpm");
-	sl->text[2].name = ft_strdup("./textures/Nouveau-projet-_1_.xpm");
+	sl->text[2].name = ft_strdup("./textures/exit.xpm");
 	sl->text[3].name = ft_strdup("./textures/pillar.xpm");
-	sl->text[4].name = ft_strdup("./textures/empty_new.xpm");
-	sl->text[5].name = ft_strdup("./textures/player_reverse.xpm");
+	sl->text[4].name = ft_strdup("./textures/empty.xpm");
+	sl->text[5].name = ft_strdup("./textures/player_left.xpm");
 	sl->text[6].name = ft_strdup("./textures/evil.xpm");
-	sl->text[7].name = ft_strdup("./textures/evil-_1_.xpm");
+	sl->text[7].name = ft_strdup("./textures/evil_left.xpm");
 	return (1);
 }
 

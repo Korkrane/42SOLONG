@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 18:13:53 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/01 17:27:27 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 19:57:48 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void	init_player(t_player *player)
 	player->walk_d = 0;
 	player->lateral_d = 0;
 	player->orientation = 0;
+	player->print_move = 0;
 }
 
 void	valid_move(t_sl *sl, int new_x, int new_y, t_player *player)
 {
+	player->print_move = 0;
 	if (sl->grid[new_y][new_x] == 'C')
 		sl->data.collect_number--;
 	if (sl->grid[new_y][new_x] == 'E' && sl->data.collect_number == 0)
@@ -31,10 +33,15 @@ void	valid_move(t_sl *sl, int new_x, int new_y, t_player *player)
 		end_sl(sl);
 	}
 	else if (sl->grid[new_y][new_x] == 'E' && sl->data.collect_number > 0)
+	{
+		player->print_move = 1;
 		printf("Bro... don't leave without all the food...\n");
+	}
 	else
 	{
-		sl->total_action++;
+		if ((sl->player.walk_d == 1 || sl->player.walk_d == -1)
+			|| (sl->player.lateral_d == 1 || sl->player.lateral_d == -1))
+			sl->total_action++;
 		sl->grid[player->pos.y][player->pos.x] = '0';
 		sl->grid[new_y][new_x] = 'P';
 		sl->player.pos.x = new_x;
@@ -53,7 +60,10 @@ void	update(t_sl *sl, t_player *player)
 	if (!grid_is_wall(new_x, new_y, sl))
 	{
 		valid_move(sl, new_x, new_y, player);
-		printf("Moves: %d\n", sl->total_action);
+		if (((sl->player.walk_d == 1 || sl->player.walk_d == -1)
+				|| (sl->player.lateral_d == 1 || sl->player.lateral_d == -1))
+			&& player->print_move != 1)
+			printf("Moves: %d\n", sl->total_action);
 		check_ennemy(sl);
 	}
 	if (((new_x == sl->ennemy.old_pos.x && new_y == sl->ennemy.old_pos.y)

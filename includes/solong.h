@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 17:27:44 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/01 17:43:51 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 19:38:44 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_player
 	t_pos		pos;
 	t_pos		old_pos;
 	int			orientation;
+	int			print_move;
 }				t_player;
 
 typedef struct s_img
