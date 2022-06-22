@@ -1,4 +1,8 @@
 # [42] so_long
+![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Korkrane/990a037d04c9a3b71a62aa5df94cac00/raw/so_long_grade.json)
+![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Korkrane/990a037d04c9a3b71a62aa5df94cac00/raw/so_long_bon.json)
+![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Korkrane/990a037d04c9a3b71a62aa5df94cac00/raw/so_long_corr.json)
+![](https://img.shields.io/github/languages/code-size/Korkrane/42SOLONG?label=size&style=flat-square)
 
 ## I. General
 
